@@ -84,4 +84,30 @@ public class TiposUsuario implements Serializable {
 		return usuario;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idTipoUsuario;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof TiposUsuario))
+			return false;
+		TiposUsuario other = (TiposUsuario) obj;
+		if (idTipoUsuario != other.idTipoUsuario)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "TiposUsuario [idTipoUsuario=" + idTipoUsuario + ", descripcion=" + descripcion + ", tipo=" + tipo
+				+ ", usuarios=" + usuarios + "]";
+	}
+
 }

@@ -84,4 +84,30 @@ public class TipoContrato implements Serializable {
 		return alquilere;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idTipoContrato;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof TipoContrato))
+			return false;
+		TipoContrato other = (TipoContrato) obj;
+		if (idTipoContrato != other.idTipoContrato)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "TipoContrato [idTipoContrato=" + idTipoContrato + ", descripcion=" + descripcion + ", tipo=" + tipo
+				+ ", alquileres=" + alquileres + "]";
+	}
+
 }

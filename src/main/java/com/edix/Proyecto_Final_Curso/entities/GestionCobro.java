@@ -24,6 +24,7 @@ import java.util.Date;
 @Table(name="gestion_cobros")
 @NamedQuery(name="GestionCobro.findAll", query="SELECT g FROM GestionCobro g")
 public class GestionCobro implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -107,5 +108,31 @@ public class GestionCobro implements Serializable {
 	public void setAlquilerServicio(AlquilerServicio alquilerServicio) {
 		this.alquilerServicio = alquilerServicio;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idCobros;
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof GestionCobro))
+			return false;
+		GestionCobro other = (GestionCobro) obj;
+		if (idCobros != other.idCobros)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "GestionCobro [idCobros=" + idCobros + ", estadoCobro=" + estadoCobro + ", fechaAbonado=" + fechaAbonado
+				+ ", importe=" + importe + ", observaciones=" + observaciones + ", plazo=" + plazo
+				+ ", alquilerServicio=" + alquilerServicio + "]";
+	}
+	
 }

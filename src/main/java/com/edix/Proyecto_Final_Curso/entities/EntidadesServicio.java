@@ -84,4 +84,30 @@ public class EntidadesServicio implements Serializable {
 		return alquilerServicio;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idEntidadServicio;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof EntidadesServicio))
+			return false;
+		EntidadesServicio other = (EntidadesServicio) obj;
+		if (idEntidadServicio != other.idEntidadServicio)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "EntidadesServicio [idEntidadServicio=" + idEntidadServicio + ", nombre=" + nombre + ", tipo=" + tipo
+				+ ", alquilerServicios=" + alquilerServicios + "]";
+	}
+
 }

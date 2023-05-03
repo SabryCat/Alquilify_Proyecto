@@ -179,4 +179,33 @@ public class Inmueble implements Serializable {
 		this.usuario = usuario;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idInmueble;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Inmueble))
+			return false;
+		Inmueble other = (Inmueble) obj;
+		if (idInmueble != other.idInmueble)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Inmueble [idInmueble=" + idInmueble + ", anioContruccion=" + anioContruccion + ", ascensor=" + ascensor
+				+ ", banios=" + banios + ", direccion=" + direccion + ", habitaciones=" + habitaciones + ", metros="
+				+ metros + ", nCatastral=" + nCatastral + ", observaciones=" + observaciones + ", plazaGarage="
+				+ plazaGarage + ", tipoFinca=" + tipoFinca + ", zonaExterior=" + zonaExterior + ", provincia="
+				+ provincia + ", usuario=" + usuario + "]";
+	}
+
 }

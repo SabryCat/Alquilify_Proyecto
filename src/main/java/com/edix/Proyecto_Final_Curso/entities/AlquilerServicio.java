@@ -151,4 +151,32 @@ public class AlquilerServicio implements Serializable {
 		return gestionCobro;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idAlquilerServicio;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof AlquilerServicio))
+			return false;
+		AlquilerServicio other = (AlquilerServicio) obj;
+		if (idAlquilerServicio != other.idAlquilerServicio)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "AlquilerServicio [idAlquilerServicio=" + idAlquilerServicio + ", baja=" + baja + ", fechaContratacion="
+				+ fechaContratacion + ", fechaFinalizacion=" + fechaFinalizacion + ", numeroContratoServicio="
+				+ numeroContratoServicio + ", alquilere=" + alquilere + ", entidadesServicio=" + entidadesServicio
+				+ ", tiposServicio=" + tiposServicio + ", gestionCobros=" + gestionCobros + "]";
+	}
+
 }

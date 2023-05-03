@@ -74,4 +74,29 @@ public class Provincia implements Serializable {
 		return inmueble;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idProvincia;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Provincia))
+			return false;
+		Provincia other = (Provincia) obj;
+		if (idProvincia != other.idProvincia)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Provincia [idProvincia=" + idProvincia + ", nombre=" + nombre + ", inmuebles=" + inmuebles + "]";
+	}
+
 }
