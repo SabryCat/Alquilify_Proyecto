@@ -3,22 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Alquilify - Gestión ágil</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-        <link href="/web/css/miestilo.css" rel="stylesheet" type="text/css">
-        <!-- Core theme CSS (includes Bootstrap)-->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		
+	<meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Web proyecto Alquilify" />
+    <meta name="author" content="Sabrina" />
+    <title>Alquilify - Gestión ágil</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="/web/images/favicon.ico" />
+    <link href="/web/css/miestilo.css" rel="stylesheet" type="text/css">
+    <!-- Core theme CSS (includes Bootstrap)-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">		
 </head>
 <body>
-<jsp:include page="componentes/navbar.jsp"/>
 
-
+	<jsp:include page="componentes/navbar.jsp"/>
 
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
@@ -31,7 +29,7 @@
                     <a class="btn btn-light alquilify-btn" href="#!">Call to Action!</a>
                 </div>
             </div>
-            <!-- Call to Action-->
+            <!-- Card-->
             <div class="card text-white bg-secondary alquilify-mb py-4 text-center">
                 <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
             </div>
@@ -78,8 +76,7 @@
 		
 		</div>
 
+	<jsp:include page="componentes/footer.jsp"/>
 
-
-<jsp:include page="componentes/footer.jsp"/>
 </body>
 </html>
