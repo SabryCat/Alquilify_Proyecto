@@ -22,7 +22,7 @@
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
             <div class="row gx-4 gx-lg-5 align-items-center alquilify-mb">
-                <div class="col-lg-12"><img class="img-fluid mb-4 mb-lg-0" src="assets/gestion-alquileres.png" alt="..." /></div>
+                <div class="col-lg-12"><img class="img-fluid mb-4 mb-lg-0" src="/web/images/gestion-alquileres.png" alt="..." /></div>
                 <div class="col-lg-12">
                     <h1 class="font-weight-light">Business Name or Tagline</h1>
                     <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
@@ -66,7 +66,7 @@
         
 		    <!-- More content Row-->
             <div class="row gx-4 gx-lg-5 align-items-center alquilify-mb">
-                <div class="col-lg-7"><img class="img-fluid mb-4 mb-lg-0 alquilify-publicidad" src="assets/home-publicidad.png" alt="..." /></div>
+                <div class="col-lg-7"><img class="img-fluid mb-4 mb-lg-0 alquilify-publicidad" src="/web/images/home-publicidad.PNG" alt="..." /></div>
                 <div class="col-lg-5">
                     <h1 class="font-weight-light">Business Name or Tagline</h1>
                     <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
