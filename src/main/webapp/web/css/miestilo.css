@@ -1,0 +1,34 @@
+        .alquilify-bar{
+		border-bottom:2px solid #FF7220;
+		}
+		.alquilify-logo{
+		height: 60px;
+		}
+		.alquilify-nav-link{
+		color: black;
+		font-size:20px;
+		}
+		.alquilify-btn{
+		border:2px solid #FF7220;
+		background:white;
+		}
+		.alquilify-btn:hover{
+		color:white;
+		background:#FF7220;
+		}
+		.alquilify-publicidad{
+		width:100%;
+		}
+		.alquilify-footer{
+		color:white; 
+		border-color: #212529;
+		}
+		.alquilify-mb{
+		 margin-bottom: 3rem !important;
+		}
+		.alquilify-mt{
+		 margin-top: 3rem !important;
+		}
+		.alquilify-bg{
+		background: #FF7220 !important;
+		}
