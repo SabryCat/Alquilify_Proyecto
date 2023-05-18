@@ -1,6 +1,14 @@
 package com.edix.Proyecto_Final_Curso.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
+import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_usuarioDao;
 
 /**
  * 
@@ -13,7 +21,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WebController {
-
+	
+	@Autowired
+	private Tipo_usuarioDao tudao;
+	
 	/**
 	 * ruta a la página de contacto
 	 * 
@@ -49,7 +60,10 @@ public class WebController {
 	 * @return web html
 	 */	
 	@GetMapping("/cuenta")
-	public String cuenta() {						
+	public String cuenta(Model model) {
+		
+		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
+		model.addAttribute("tipousuario",tipousuario);
 		return "cuenta";		 		
 	}
 	/**

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
     <jsp:include page="componentes/librerias.jsp"/>
 </head>
 <body>
-	
+
 	<jsp:include page="componentes/navbar.jsp"/>
 	<!-- Form registrarse -->
 		<div class="container px-4 px-lg-5 mt-4">			
@@ -16,7 +17,21 @@
 				<div class="card card border-1 rounded-3">
 				  <div class="card-body p-5 text-center">
 					<h5 class="card-title text-center mb-5">Registrarse como nuevo usuario</h5>
-					
+						
+
+	
+	value="${ele.id_tipo_usuario}" 
+	
+			<select name="tipoUser">
+	<option  >Seleccionar</option>
+		<c:forEach var="ele" items="${tipousuario}">
+		<option > ${ele.tipo}</option>
+	</c:forEach>
+	</select>
+	
+	
+	
+	
 					<div class="form-floating mb-4">
 					  <input type="text" id="nombre" class="form-control form-control-lg" />
 					  <label class="form-label" for="nombre">Nombre</label>
