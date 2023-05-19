@@ -17,21 +17,16 @@
 				<div class="card card border-1 rounded-3">
 				  <div class="card-body p-5 text-center">
 					<h5 class="card-title text-center mb-5">Registrarse como nuevo usuario</h5>
-						
+					
+					<div class="form-floating mb-4">
+						<select name="tipoUser" class="form-select">
+							<option>Seleccionar Tipo de Usuario</option>
+							<c:forEach var="ele" items="${tipousuario}">
+								<option value="${ele.idTipoUsuario}"> ${ele.tipo}</option>
+							</c:forEach>
+						</select>
+					</div>
 
-	
-	value="${ele.id_tipo_usuario}" 
-	
-			<select name="tipoUser">
-	<option  >Seleccionar</option>
-		<c:forEach var="ele" items="${tipousuario}">
-		<option > ${ele.tipo}</option>
-	</c:forEach>
-	</select>
-	
-	
-	
-	
 					<div class="form-floating mb-4">
 					  <input type="text" id="nombre" class="form-control form-control-lg" />
 					  <label class="form-label" for="nombre">Nombre</label>

@@ -63,6 +63,7 @@ public class WebController {
 	public String cuenta(Model model) {
 		
 		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
+		System.out.println(tipousuario);
 		model.addAttribute("tipousuario",tipousuario);
 		return "cuenta";		 		
 	}
