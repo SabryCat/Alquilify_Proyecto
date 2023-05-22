@@ -14,8 +14,11 @@ public class Tipo_usuarioDaoImpl implements Tipo_usuarioDao{
 	private Tipo_usuarioRepository turepo;
 	@Override
 	public List<TiposUsuario> buscarTodos() {
-		// TODO Auto-generated method stub
 		return turepo.findAll();
+	}
+	@Override
+	public TiposUsuario buscarTipoUsuario(int idTipoUsuario) {
+		return turepo.findById(idTipoUsuario).orElse(null);
 	}
 
 		
