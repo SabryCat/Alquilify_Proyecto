@@ -2,7 +2,6 @@ package com.edix.Proyecto_Final_Curso.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
 @Table(name="alquiler_servicios")
 @NamedQuery(name="AlquilerServicio.findAll", query="SELECT a FROM AlquilerServicio a")
 public class AlquilerServicio implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,17 +38,12 @@ public class AlquilerServicio implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_alquiler")
 	private Alquilere alquilere;
-
-	//bi-directional many-to-one association to EntidadesServicio
+	
+	//uni-directional many-to-one association to ProveedoresServicio
 	@ManyToOne
-	@JoinColumn(name="id_emisor")
-	private EntidadesServicio entidadesServicio;
-
-	//bi-directional many-to-one association to TiposServicio
-	@ManyToOne
-	@JoinColumn(name="id_tipo_servicio")
-	private TiposServicio tiposServicio;
-
+	@JoinColumn(name="id_proveedor")
+	private ProveedoresServicio proveedoresServicio;
+	
 	//bi-directional many-to-one association to GestionCobro
 	@OneToMany(mappedBy="alquilerServicio")
 	private List<GestionCobro> gestionCobros;
@@ -103,21 +98,13 @@ public class AlquilerServicio implements Serializable {
 	public void setAlquilere(Alquilere alquilere) {
 		this.alquilere = alquilere;
 	}
-
-	public EntidadesServicio getEntidadesServicio() {
-		return this.entidadesServicio;
+	
+	public ProveedoresServicio getProveedoresServicio() {
+		return this.proveedoresServicio;
 	}
 
-	public void setEntidadesServicio(EntidadesServicio entidadesServicio) {
-		this.entidadesServicio = entidadesServicio;
-	}
-
-	public TiposServicio getTiposServicio() {
-		return this.tiposServicio;
-	}
-
-	public void setTiposServicio(TiposServicio tiposServicio) {
-		this.tiposServicio = tiposServicio;
+	public void setProveedoresServicio(ProveedoresServicio proveedoresServicio) {
+		this.proveedoresServicio = proveedoresServicio;
 	}
 
 	public List<GestionCobro> getGestionCobros() {
@@ -141,7 +128,8 @@ public class AlquilerServicio implements Serializable {
 
 		return gestionCobro;
 	}
-
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -165,9 +153,9 @@ public class AlquilerServicio implements Serializable {
 	@Override
 	public String toString() {
 		return "AlquilerServicio [idAlquilerServicio=" + idAlquilerServicio + ", baja=" + baja + ", fechaContratacion="
-				+ fechaContratacion + ", fechaFinalizacion=" + fechaFinalizacion + ", numeroContratoServicio="
-				+ numeroContratoServicio + ", alquilere=" + alquilere + ", entidadesServicio=" + entidadesServicio
-				+ ", tiposServicio=" + tiposServicio + ", gestionCobros=" + gestionCobros + "]";
+				+ fechaContratacion + ", fechaFinalizacion=" + fechaFinalizacion 
+				+ ", numeroContratoServicio=" + numeroContratoServicio + ", proveedoresServicio=" + proveedoresServicio
+				+ "]";
 	}
 
 }

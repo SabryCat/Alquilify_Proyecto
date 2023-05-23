@@ -61,7 +61,14 @@
 							</select>
 						</div>		
 	
-
+						<div class="form-floating mb-4">
+							<select name="tipoUser" class="form-select">
+								<option>Seleccionar proveedor</option>
+								<c:forEach var="ele" items="${proveedores}">
+									<option value="${ele.idProveedor}"> ${ele.nombre}</option>
+								</c:forEach>
+							</select>
+						</div>	
 	
 	
 	

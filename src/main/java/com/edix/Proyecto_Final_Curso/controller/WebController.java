@@ -7,12 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.edix.Proyecto_Final_Curso.entities.EntidadesServicio;
+import com.edix.Proyecto_Final_Curso.entities.ProveedoresServicio;
 import com.edix.Proyecto_Final_Curso.entities.Provincia;
 import com.edix.Proyecto_Final_Curso.entities.TipoContrato;
 import com.edix.Proyecto_Final_Curso.entities.TiposServicio;
 import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
-import com.edix.Proyecto_Final_Curso.modeloDao.Entidades_servicioDao;
+import com.edix.Proyecto_Final_Curso.modeloDao.Proveedores_servicioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.ProvinciasDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_contratoDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_servicioDao;
@@ -39,7 +39,7 @@ public class WebController {
 	@Autowired
 	private Tipo_servicioDao tsdao;
 	@Autowired
-	private Entidades_servicioDao esdao;
+	private Proveedores_servicioDao esdao;
 	
 	/**
 	 * ruta a la página de contacto
@@ -90,8 +90,8 @@ public class WebController {
 		List<TiposServicio> tiposservicios = tsdao.buscarTodos();
 		model.addAttribute("tiposservicios", tiposservicios);
 		
-		/*List<EntidadesServicio> entidadesservicios = esdao.buscarTodos();
-		model.addAttribute("entidadesservicios", entidadesservicios);*/
+		List<ProveedoresServicio> proveedores = esdao.buscarTodos();
+		model.addAttribute("proveedores", proveedores);
 		return "cuenta";
 	
 	}

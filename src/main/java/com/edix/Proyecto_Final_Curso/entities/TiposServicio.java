@@ -2,7 +2,6 @@ package com.edix.Proyecto_Final_Curso.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -23,10 +22,6 @@ public class TiposServicio implements Serializable {
 	private String decripcion;
 
 	private String tipo;
-
-	//bi-directional many-to-one association to AlquilerServicio
-	@OneToMany(mappedBy="tiposServicio")
-	private List<AlquilerServicio> alquilerServicios;
 
 	public TiposServicio() {
 	}
@@ -55,28 +50,6 @@ public class TiposServicio implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public List<AlquilerServicio> getAlquilerServicios() {
-		return this.alquilerServicios;
-	}
-
-	public void setAlquilerServicios(List<AlquilerServicio> alquilerServicios) {
-		this.alquilerServicios = alquilerServicios;
-	}
-
-	public AlquilerServicio addAlquilerServicio(AlquilerServicio alquilerServicio) {
-		getAlquilerServicios().add(alquilerServicio);
-		alquilerServicio.setTiposServicio(this);
-
-		return alquilerServicio;
-	}
-
-	public AlquilerServicio removeAlquilerServicio(AlquilerServicio alquilerServicio) {
-		getAlquilerServicios().remove(alquilerServicio);
-		alquilerServicio.setTiposServicio(null);
-
-		return alquilerServicio;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,7 +73,7 @@ public class TiposServicio implements Serializable {
 	@Override
 	public String toString() {
 		return "TiposServicio [idTipoServicio=" + idTipoServicio + ", decripcion=" + decripcion + ", tipo=" + tipo
-				+ ", alquilerServicios=" + alquilerServicios + "]";
+				+ "]";
 	}
 
 }
