@@ -19,7 +19,12 @@ public class DataUserConfiguration extends WebSecurityConfigurerAdapter {
 	private DataSource dataSource;
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	auth
-	.jdbcAuthentication().dataSource(dataSource);
+	.jdbcAuthentication().dataSource(dataSource)
+	.usersByUsernameQuery("select email, clave, permitido from Usuarios where email=?")
+	.authoritiesByUsernameQuery("select u.email, t.tipo "
+								+ "from Tipos_Usuarios t " +  
+									"inner join Usuarios u on u.id_tipo_usuario = t.id_tipo_usuario " + 
+									"where u.email = ?");
 	}
 	
 	@Override
@@ -28,8 +33,16 @@ public class DataUserConfiguration extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.authorizeRequests()
 		// Los directorios estáticos no requieren autenticacion
-		.antMatchers("/bootstrap/**",  "/images/**", "/css/**", "js/**").permitAll()
-		.antMatchers("/usuarios/altaUsuario").permitAll();
+		.antMatchers("/bootstrap/**", "/images/**", "/css/**", "/js/**").permitAll()
+		.antMatchers("/").permitAll()
+		.antMatchers("/index").permitAll()
+		.antMatchers("/app/panelControl").hasAnyAuthority("Administrador")
+		//.anyRequest().authenticated()
+		.and().formLogin().permitAll();
+		// El formulario de Login no requiere autenticacion
+					//.and().formLogin().permitAll().successHandler(loginHandler);
+		
+		/*.antMatchers("/usuarios/altaUsuario").permitAll();*/
 	}
 	
 	@Bean

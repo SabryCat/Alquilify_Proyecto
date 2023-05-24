@@ -118,4 +118,13 @@ public class WebController {
 		return "index";		 		
 	}
 
+	/**
+	 * ruta al panel de la aplicación
+	 * 
+	 * @return web html
+	 */		
+	@GetMapping("app/panelControl")
+	public String panelControl() {						
+		return "app/panelControl";		 		
+	}
 }
