@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edix.Proyecto_Final_Curso.entities.ProveedoresServicio;
 import com.edix.Proyecto_Final_Curso.entities.Provincia;
@@ -26,7 +30,7 @@ import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_usuarioDao;
  * @version 1.0
  *
  */
-
+@RequestMapping("/")
 @Controller
 public class WebController {
 	
@@ -46,7 +50,7 @@ public class WebController {
 	 * 
 	 * @return web html
 	 */
-	@GetMapping("/contacto")
+	@GetMapping("contacto")
 	public String contacto() {						
 		return "contacto";		 		
 	}	
@@ -56,7 +60,7 @@ public class WebController {
 	 * 
 	 * @return web html
 	 */	
-	@GetMapping("/demo")
+	@GetMapping("demo")
 	public String demo() {						
 		return "app/demo";		 		
 	}
@@ -65,7 +69,7 @@ public class WebController {
 	 * 
 	 * @return web html
 	 */	
-	@GetMapping("/nosotros")
+	@GetMapping("nosotros")
 	public String nosotros() {						
 		return "nosotros";		 		
 	}	
@@ -75,13 +79,13 @@ public class WebController {
 	 * 
 	 * @return web html
 	 */	
-	@GetMapping("/cuenta")
+	@GetMapping("cuenta")
 	public String cuenta(Model model) {		
 		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
 		//System.out.println(tipousuario);
 		model.addAttribute("tipousuario",tipousuario);
 		
-		List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
+		/*List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
 		model.addAttribute("tiposcontratos",tiposcontratos);
 
 		List<Provincia> provincias = pdao.buscarTodas();
@@ -91,7 +95,7 @@ public class WebController {
 		model.addAttribute("tiposservicios", tiposservicios);
 		
 		List<ProveedoresServicio> proveedores = esdao.buscarTodos();
-		model.addAttribute("proveedores", proveedores);
+		model.addAttribute("proveedores", proveedores);*/
 		return "cuenta";
 	
 	}
@@ -100,7 +104,7 @@ public class WebController {
 	 * 
 	 * @return web html
 	 */		
-	@GetMapping("/servicios")
+	@GetMapping("servicios")
 	public String servicios() {						
 		return "servicios";		 		
 	}
@@ -113,5 +117,5 @@ public class WebController {
 	public String home() {						
 		return "index";		 		
 	}
-	
+
 }

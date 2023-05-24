@@ -17,14 +17,18 @@
 				<div class="card card border-1 rounded-3">
 				  <div class="card-body p-5 text-center">
 					<h5 class="card-title text-center mb-5">Registrarse como nuevo usuario</h5>
-					<form action="/altaUsuario" method="post">
-					
-					
-					
-					
-					
+					<c:choose>
+				       <c:when test="${info == null}">
+				       </c:when>
+				       <c:otherwise>
+				             	<div class="alert alert-info">
+									${info}
+								</div>
+				       </c:otherwise>
+				  	</c:choose>
+					<form action="/usuarios/altaUsuario" method="post">
 						<div class="form-floating mb-4">
-							<select name="tipoUser" class="form-select">
+							<select name="tipoDeUsuario" class="form-select" required>
 								<option>Seleccionar Tipo de Usuario</option>
 								<c:forEach var="ele" items="${tipousuario}">
 									<option value="${ele.idTipoUsuario}"> ${ele.tipo}</option>
@@ -34,7 +38,7 @@
 	
 	
 	
-						<div class="form-floating mb-4">
+						<!--<div class="form-floating mb-4">
 							<select name="tipoUser" class="form-select">
 								<option>Seleccionar Tipo de contrato de alquiler</option>
 								<c:forEach var="ele" items="${tiposcontratos}">
@@ -68,44 +72,44 @@
 									<option value="${ele.idProveedor}"> ${ele.nombre}</option>
 								</c:forEach>
 							</select>
-						</div>	
+						</div>-->	
 	
 	
 	
 	
 	
 						<div class="form-floating mb-4">
-						  <input type="text" id="nombre" class="form-control form-control-lg" />
+						  <input type="text" name="nombre" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="nombre">Nombre</label>
 						</div>
 	
 						<div class="form-floating mb-4">
-						  <input type="text" id="apellidos" class="form-control form-control-lg" />
+						  <input type="text" name="apellidos" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="apellidos">Apellidos</label>
 						</div>
 						
 						<div class="form-floating mb-4">
-						  <input type="text" id="nif" class="form-control form-control-lg" />
+						  <input type="text" name="nif" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="nif">DNI</label>
 						</div>
 	
 						<div class="form-floating mb-4">
-						  <input type="email" id="email" class="form-control form-control-lg" />
+						  <input type="email" name="email" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="email">Email</label>
 						</div>
 	
 						<div class="form-floating mb-4">
-						  <input type="text" id="telefono" class="form-control form-control-lg" />
+						  <input type="text" name="telefono" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="telefono">Teléfono</label>
 						</div>
 	
 						<div class="form-floating mb-4">
-						  <input type="text" id="domicilio" class="form-control form-control-lg" />
+						  <input type="text" name="domicilio" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="domicilio">Domicilio</label>
 						</div>
 	
 						<div class="form-floating mb-4">
-						  <input type="text" id="clave" class="form-control form-control-lg" />
+						  <input type="password" name="clave" class="form-control form-control-lg" required/>
 						  <label class="form-label" for="clave">Clave/Password</label>
 						</div>
 	

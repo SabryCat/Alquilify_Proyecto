@@ -28,7 +28,8 @@ public class DataUserConfiguration extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.authorizeRequests()
 		// Los directorios estáticos no requieren autenticacion
-		.antMatchers("/bootstrap/**",  "/images/**", "/css/**", "js/**").permitAll();
+		.antMatchers("/bootstrap/**",  "/images/**", "/css/**", "js/**").permitAll()
+		.antMatchers("/usuarios/altaUsuario").permitAll();
 	}
 	
 	@Bean
