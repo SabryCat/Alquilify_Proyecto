@@ -55,6 +55,13 @@ public class Inmueble implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_propietario")
 	private Usuario usuario;
+	
+	
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="id_administrador")
+	private Usuario usuario_admin;
+	
 
 	public Inmueble() {
 	}
@@ -171,6 +178,14 @@ public class Inmueble implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Usuario getUsuario_admin() {
+		return usuario_admin;
+	}
+
+	public void setUsuario_admin(Usuario usuario_admin) {
+		this.usuario_admin = usuario_admin;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -197,7 +212,9 @@ public class Inmueble implements Serializable {
 				+ ", banios=" + banios + ", direccion=" + direccion + ", habitaciones=" + habitaciones + ", metros="
 				+ metros + ", nCatastral=" + nCatastral + ", observaciones=" + observaciones + ", plazaGarage="
 				+ plazaGarage + ", tipoFinca=" + tipoFinca + ", zonaExterior=" + zonaExterior + ", provincia="
-				+ provincia + ", usuario=" + usuario + "]";
+				+ provincia + ", usuario=" + usuario + ", usuario_admin=" + usuario_admin + "]";
 	}
+
+
 
 }

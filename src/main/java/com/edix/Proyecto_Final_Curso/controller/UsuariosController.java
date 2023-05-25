@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,12 @@ public class UsuariosController {
 	@Autowired
 	private UsuarioDao udao;
 	
+	@GetMapping("/modulo")
+	public String home() {						
+		return "app/usuarios";		 		
+	}
+	
+
 	@PostMapping("/altaUsuario")
 	public String altaUsuario(@RequestParam String tipoDeUsuario,
 								@RequestParam String nombre,
@@ -41,11 +48,10 @@ public class UsuariosController {
 		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
 		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
-			redirect.addFlashAttribute("info", "El usuario ya existe en nuetra plataforma");
+			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");
 			return "redirect:/cuenta";		
 		}else {
-			redirect.addFlashAttribute("info", "El usuario se ha insertado correctamente");
-			return "redirect:/cuenta";
+			return "redirect:/app/panelControl";
 		}
 	}
 }
