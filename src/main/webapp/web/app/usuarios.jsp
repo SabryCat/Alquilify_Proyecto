@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,59 +10,168 @@
 </head>
 <body>
 <main class="d-flex flex-nowrap">
-	<jsp:include page="componentesApp/sidebar.jsp"/>
-	
-    <section id="favourites">
-      
-  
-  <ul id="myTab" class="nav nav-tabs" role="tablist">
-  <li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1, .etabi-img1" data-bs-toggle="tab">C1</a></li>
-  <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2, .etabi-img2" data-bs-toggle="tab">C2</a></li>
-  <li class="nav-item"><a class="nav-link" href="#tab-3" data-bs-target=".etab-p3, .etabi-img3" data-bs-toggle="tab">C3</a></li>
-  <li class="nav-item"><a class="nav-link" href="#tab-4" data-bs-target=".etab-p4, .etabi-img4" data-bs-toggle="tab">C4</a></li>
-  <li class="nav-item"><a class="nav-link" href="#tab-5" data-bs-target=".etab-p5, .etabi-img5" data-bs-toggle="tab">C5</a></li>
-  <li class="nav-item"><a class="nav-link" href="#tab-6" data-bs-target=".etab-p6, .etabi-img6" data-bs-toggle="tab">C6</a></li>
-</ul>
-<div class="tab-content">
-  <div class="tab-pane fade show active etab-p1">
-    <p>Content 1.</p>
-  </div>
-  <div class="tab-pane fade etab-p2">
-    <p>Content 2.</p>
-  </div>
-  <div class="tab-pane fade etab-p3">
-    <p>Content 3.</p>
-  </div>
-  <div class="tab-pane fade etab-p4">
-    <p>Content 4.</p>
-  </div>
-  <div class="tab-pane fade etab-p5">
-    <p>Content 5.</p>
-  </div>
-  <div class="tab-pane fade etab-p6">
-    <p>Content 6.</p>
-  </div>
-</div>
-<div class="tab-content">
-  <div class="tab-pane fade show active etabi-img1">
-    <p>Content 111.</p>
-  </div>
-  <div class="tab-pane fade etabi-img2">
-    <p>Content 2222.</p>
-  </div>
-  <div class="tab-pane fade etabi-img3">
-    <p>Content 3333.</p>
-  </div>
-  <div class="tab-pane fade etabi-img4">
-    <p>Content 4444.</p>
-  </div>
-  <div class="tab-pane fade etabi-img5">
-    <p>Content 5555.</p>
-  </div>
-  <div class="tab-pane fade etabi-img6">
-    <p>Content 6666.</p>
-  </div>
-</div>
+	<!-- sidebar con parámetro -->
+	<jsp:include page="componentesApp/sidebar.jsp">
+		<jsp:param name="modulo" value="usuarios" />
+	</jsp:include>
+		<!-- cuerpo -->
+ 		<div class="container px-4 px-lg-5 mt-4 mb-4">			
+			<div class="row d-flex justify-content-center align-items-start">
+			
+		  	<c:choose>
+		       <c:when test="${info == null}">
+		       </c:when>
+		       <c:otherwise>
+		             	<div class="alert alert-info">
+							${info}
+						</div>
+		       </c:otherwise>
+		  	</c:choose>
+			
+			  <div class="col-sm-12 mx-auto">
+				<!-- tabs -->
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+				  <li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">PROPIETARIOS</a></li>
+				  <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">INQUILINOS</a></li>
+				  <li class="nav-item"><a class="nav-link" href="#tab-3" data-bs-target=".etab-p3" data-bs-toggle="tab">ALTAS</a></li>			  
+				</ul>
+				
+				<div class="tab-content">
+				<!-- Listado Propietarios -->
+				 <div class="p-3 tab-pane fade show active etab-p1">
+		    		<table class="table table-striped">
+						  <thead>
+						    <tr>
+						      <th scope="col">#</th>
+						      <th scope="col">Nombre</th>
+						      <th scope="col">Apellidos</th>
+						      <th scope="col">DNI</th>
+						      <th scope="col">Email</th>
+						      <th scope="col">Teléfono</th>
+						      <th scope="col">Domicilio</th>
+						      <th scope="col">Acciones</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							 <c:forEach var="ele" items="${propietarios}">
+								<tr>
+								 	<th scope="row">${ele.idUsuario}</th>
+									<td> ${ele.nombre}</td>
+									<td> ${ele.apellidos}</td>
+									<td> ${ele.nif}</td>
+									<td> ${ele.email}</td>
+									<td> ${ele.telefono}</td>
+									<td> ${ele.domicilio}</td>
+									<td>
+										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+											<a href="/usuarios/verficha/${ele.idUsuario}"  type="button" class="btn btn-outline-primary">Editar</a>
+											<a href="/usuarios/eliminar/${ele.idUsuario}"  type="button" class="btn btn-outline-warning">Eliminar</a>
+										</div>
+									</td>
+								</tr>	 
+							</c:forEach>
+						 </tbody>
+					</table>
+				  </div>
+				  <!-- Listado Inquilinos -->
+				  <div class="p-3 tab-pane fade etab-p2">
+		    		<table class="table table-striped">
+						  <thead>
+						    <tr>
+								<th scope="col">#</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Apellidos</th>
+								<th scope="col">DNI</th>
+								<th scope="col">Email</th>
+								<th scope="col">Teléfono</th>
+								<th scope="col">Domicilio</th>
+								<th scope="col">Acciones</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							 <c:forEach var="ele" items="${inquilinos}">
+								<tr>
+								 	<th scope="row">${ele.idUsuario}</th>
+									<td> ${ele.nombre}</td>
+									<td> ${ele.apellidos}</td>
+									<td> ${ele.nif}</td>
+									<td> ${ele.email}</td>
+									<td> ${ele.telefono}</td>
+									<td> ${ele.domicilio}</td>
+									<td>
+										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+											<a href="/usuarios/verficha/${ele.idUsuario}"  type="button" class="btn btn-outline-primary">Editar</a>
+											<a href="/usuarios/eliminar/${ele.idUsuario}"  type="button" class="btn btn-outline-warning">Eliminar</a>
+										</div>
+									</td>
+								</tr>	 
+							</c:forEach>
+						</tbody>
+					</table>
+				  </div>
+				  <!-- Formulario Alta -->
+				  <div class="p-3 tab-pane fade etab-p3">
+						<h5 class="card-title text-center mb-2">Registrar nuevo usuario</h5>
+						<form action="/usuarios/altaNuevosUsuarios" method="post" class="col-sm-8 mx-auto">
+							<div class="form-floating mb-2">
+								<select name="tipoDeUsuario" class="form-select" required>
+									<option>Seleccionar Tipo de Usuario</option>
+									<c:forEach var="ele" items="${tipousuario}">
+										<option value="${ele.idTipoUsuario}"> ${ele.tipo}</option>
+									</c:forEach>
+								</select>
+							</div>
+
+							<div class="form-floating mb-2">
+							  <input type="text" name="nombre" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="nombre">Nombre</label>
+							</div>
+		
+							<div class="form-floating mb-2">
+							  <input type="text" name="apellidos" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="apellidos">Apellidos</label>
+							</div>
+							
+							<div class="form-floating mb-2">
+							  <input type="text" name="nif" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="nif">DNI</label>
+							</div>
+		
+							<div class="form-floating mb-2">
+							  <input type="email" name="email" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="email">Email</label>
+							</div>
+		
+							<div class="form-floating mb-2">
+							  <input type="text" name="telefono" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="telefono">Teléfono</label>
+							</div>
+		
+							<div class="form-floating mb-2">
+							  <input type="text" name="domicilio" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="domicilio">Domicilio</label>
+							</div>
+		
+							<div class="form-floating mb-2">
+							  <input type="password" name="clave" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="clave">Clave/Password</label>
+							</div>
+		
+							<div class="d-grid">
+								<button class="p-3 btn text-white btn-primary text-uppercase fw-bold" type="submit">
+								Registrar nuevo usuario
+								</button>
+							</div>
+						</form>
+				  </div>
+				  
+				</div>
+				<!-- fin tabs -->
+      		</div>
+     	 </div>
+      </div>
+  	<!-- fin cuerpo -->
+
   
   
   
@@ -75,7 +185,7 @@
         	    .removeClass('active show')
         	})
         </script>
-      </section>
+  
 </main>					
 </body>
 </html>

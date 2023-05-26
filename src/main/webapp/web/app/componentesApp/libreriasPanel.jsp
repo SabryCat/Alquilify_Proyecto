@@ -1,4 +1,5 @@
 	<meta charset="ISO-8859-1">
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Web proyecto Alquilify" />
     <meta name="author" content="Sabrina" />

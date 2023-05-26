@@ -9,7 +9,10 @@
 </head>
 <body>
 <main class="d-flex flex-nowrap">
-	<jsp:include page="componentesApp/sidebar.jsp"/>
+	<!-- sidebar con parámetro -->
+	<jsp:include page="componentesApp/sidebar.jsp">
+		<jsp:param name="modulo" value="home" />
+	</jsp:include>
 	
 	HOLA aca van cosas 
 	

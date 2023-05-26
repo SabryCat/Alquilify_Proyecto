@@ -20,6 +20,5 @@ public class Tipo_usuarioDaoImpl implements Tipo_usuarioDao{
 	public TiposUsuario buscarTipoUsuario(int idTipoUsuario) {
 		return turepo.findById(idTipoUsuario).orElse(null);
 	}
-
-		
+	
 }

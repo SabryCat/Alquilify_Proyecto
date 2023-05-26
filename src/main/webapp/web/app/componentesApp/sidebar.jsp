@@ -1,25 +1,28 @@
 
 <jsp:include page="svgIcons.jsp"/>
+<%-- Acceder al parámetro para marcar el item selected --%>
+<% String itemMenu = request.getParameter("modulo"); %>
   <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 200px;">
     <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <span class="fs-4">Panel Alquilify</span>
+      <span class="fs-4">Panel Alquilify </span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
+      <li>
+        <a href="/app/panelControl" class="nav-link text-white <% if(itemMenu.equals("home")) { %>active<% } %>" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
       <li>
-        <a href="/usuarios/modulo" class="nav-link text-white">
+        <a href="/usuarios/modulo" class="nav-link text-white <% if(itemMenu.equals("usuarios")) { %>active<% } %>">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           Usuarios
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="#" class="nav-link text-white <% if(itemMenu.equals("Inmuebles")) { %>active<% } %>">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Inmuebles
         </a>

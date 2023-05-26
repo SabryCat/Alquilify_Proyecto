@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,14 +17,14 @@
 			  <div class="col-sm-12 col-md-8 col-lg-8 mx-auto">
 				<div class="card card border-1 rounded-3 p-3">							
 					<p class="text-center m-5">
-					  <a class="btn alquilify-bg text-white" href="/usuarios/altaUsuario" role="button">
+					  <a class="btn alquilify-bg text-white" href="app/panelControl" role="button">
 					    Ir a mi área de usuario
 					  </a><br>
 					  	<c:choose>
 					       <c:when test="${info == null}">
 					       </c:when>
 					       <c:otherwise>
-					             	<div class="alert alert-info">
+					             	<div class="alert alert-danger">
 										${info}
 									</div>
 					       </c:otherwise>

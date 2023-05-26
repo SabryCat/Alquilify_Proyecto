@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="componentesApp/sidebar.jsp">
+		<jsp:param name="modulo" value="usuarios" />
+	</jsp:include>
 INMUEBLES
 </body>
 </html>
