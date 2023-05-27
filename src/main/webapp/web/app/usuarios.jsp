@@ -84,7 +84,7 @@
 								<th scope="col">Email</th>
 								<th scope="col">Teléfono</th>
 								<th scope="col">Domicilio</th>
-								<th scope="col"></th>
+								<th scope="col">Alquileres</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -97,6 +97,11 @@
 									<td> ${ele.email}</td>
 									<td> ${ele.telefono}</td>
 									<td> ${ele.domicilio}</td>
+									<td>
+										<div class="btn-group btn-group-sm" role="group" aria-label="propiedades" style="margin-left: 30%;">
+											<a href="/usuarios/verAlquileres/${ele.idUsuario}"  type="button" class="btn btn-outline-primary">ver</a>
+										</div>
+									</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
 											<a href="/usuarios/verficha/${ele.idUsuario}"  type="button" class="btn btn-outline-primary">Editar</a>

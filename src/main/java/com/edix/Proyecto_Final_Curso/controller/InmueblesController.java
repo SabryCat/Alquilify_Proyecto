@@ -34,7 +34,6 @@ public class InmueblesController {
 	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
 		Usuario administrador = udao.buscarUsuario(idAdmin);
 		List<Inmueble> inmuebles = idao.buscarTodosPorAdmin(administrador);
-		System.out.println(inmuebles);
 		model.addAttribute("inmuebles",inmuebles);
 		List<Usuario> propietarios = udao.buscarTodosPropietarios(idAdmin);
 		model.addAttribute("propietarios",propietarios);

@@ -58,7 +58,42 @@ public class Alquilere implements Serializable {
 	@JoinColumn(name="id_inquilino")
 	private Usuario usuario;
 
+	//bi-directional many-to-one association to Inmueble
+	@JoinColumn(name="id_inmueble")
+	private Inmueble inmueble;
+	
 	public Alquilere() {
+	}
+	
+	
+	
+	public Alquilere(int idAlquiler, double actualizacionRenta, Date fechaComienzo, Date fechaFin, int fianza,
+			float importe, float importeFianza, String observaciones, String renovacion,
+			TipoContrato tipoContrato, Usuario usuario, Inmueble inmueble) {
+		super();
+		this.idAlquiler = idAlquiler;
+		this.actualizacionRenta = actualizacionRenta;
+		this.fechaComienzo = fechaComienzo;
+		this.fechaFin = fechaFin;
+		this.fianza = fianza;
+		this.importe = importe;
+		this.importeFianza = importeFianza;
+		this.observaciones = observaciones;
+		this.renovacion = renovacion;
+		this.tipoContrato = tipoContrato;
+		this.usuario = usuario;
+		this.inmueble = inmueble;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Alquilere [idAlquiler=" + idAlquiler + ", actualizacionRenta=" + actualizacionRenta + ", fechaComienzo="
+				+ fechaComienzo + ", fechaFin=" + fechaFin + ", fianza=" + fianza + ", importe=" + importe
+				+ ", importeFianza=" + importeFianza + ", observaciones=" + observaciones + ", renovacion=" + renovacion
+				+ ", alquilerServicios=" + alquilerServicios + ", tipoContrato=" + tipoContrato + ", usuario=" + usuario
+				+ ", inmueble=" + inmueble + "]";
 	}
 
 	public int getIdAlquiler() {
@@ -171,4 +206,14 @@ public class Alquilere implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Inmueble getInmuebles() {
+		return inmueble;
+	}
+
+	public void setInmuebles(Inmueble inmueble) {
+		this.inmueble = inmueble;
+	}
+
+
+	
 }

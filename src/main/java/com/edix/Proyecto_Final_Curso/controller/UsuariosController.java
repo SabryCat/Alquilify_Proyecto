@@ -35,12 +35,12 @@ public class UsuariosController {
 	private InmuebleDao idao;
 	
 	@GetMapping("/modulo")
-	public String home(@SessionAttribute("idUsuarioSession") int id, Model model) {
+	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
 		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
 		model.addAttribute("tipousuario",tipousuario);
-		List<Usuario> propietarios = udao.buscarTodosPropietarios(id);
+		List<Usuario> propietarios = udao.buscarTodosPropietarios(idAdmin);
 		model.addAttribute("propietarios",propietarios);
-		List<Usuario> inquilinos = udao.buscarTodosInquilinos(id);
+		List<Usuario> inquilinos = udao.buscarTodosInquilinos(idAdmin);
 		model.addAttribute("inquilinos",inquilinos);
 		return "app/usuarios";		 		
 	}
@@ -84,7 +84,7 @@ public class UsuariosController {
 	}
 	
 	@PostMapping("/altaNuevosUsuarios")
-	public String altaNuevosUsuarios(@SessionAttribute("idUsuarioSession") int id,
+	public String altaNuevosUsuarios(@SessionAttribute("idUsuarioSession") int idAdmin,
 										@RequestParam String tipoDeUsuario,
 										@RequestParam String nombre,
 										@RequestParam String apellidos,
@@ -97,7 +97,7 @@ public class UsuariosController {
 	
 		String encriptado = passwordEncoder.encode(clave); 
 		TiposUsuario tipUsuario = tudao.buscarTipoUsuario(Integer.parseInt(tipoDeUsuario));
-		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, id, tipUsuario);
+		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, idAdmin, tipUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");		
 		}else {
