@@ -32,8 +32,8 @@ public class Inmueble implements Serializable {
 
 	private float metros;
 
-	@Column(name="n_catastral")
-	private String nCatastral;
+	@Column(name="numero_catastral")
+	private String numeroCatastral;
 
 	private String observaciones;
 
@@ -60,11 +60,36 @@ public class Inmueble implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="id_administrador")
-	private Usuario usuario_admin;
+	private Usuario usuarioAdmin;
 	
 
 	public Inmueble() {
 	}
+
+	
+	
+	public Inmueble(int idInmueble, String anioContruccion, String ascensor, int banios, String direccion,
+			int habitaciones, float metros, String numeroCatastral, String observaciones, String plazaGarage,
+			String tipoFinca, String zonaExterior, Provincia provincia, Usuario usuario, Usuario usuarioAdmin) {
+		super();
+		this.idInmueble = idInmueble;
+		this.anioContruccion = anioContruccion;
+		this.ascensor = ascensor;
+		this.banios = banios;
+		this.direccion = direccion;
+		this.habitaciones = habitaciones;
+		this.metros = metros;
+		this.numeroCatastral = numeroCatastral;
+		this.observaciones = observaciones;
+		this.plazaGarage = plazaGarage;
+		this.tipoFinca = tipoFinca;
+		this.zonaExterior = zonaExterior;
+		this.provincia = provincia;
+		this.usuario = usuario;
+		this.usuarioAdmin = usuarioAdmin;
+	}
+
+
 
 	public int getIdInmueble() {
 		return this.idInmueble;
@@ -122,12 +147,12 @@ public class Inmueble implements Serializable {
 		this.metros = metros;
 	}
 
-	public String getNCatastral() {
-		return this.nCatastral;
+	public String getnumeroCatastral() {
+		return this.numeroCatastral;
 	}
 
-	public void setNCatastral(String nCatastral) {
-		this.nCatastral = nCatastral;
+	public void setnumeroCatastral(String numeroCatastral) {
+		this.numeroCatastral = numeroCatastral;
 	}
 
 	public String getObservaciones() {
@@ -178,12 +203,12 @@ public class Inmueble implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Usuario getUsuario_admin() {
-		return usuario_admin;
+	public Usuario getusuarioAdmin() {
+		return usuarioAdmin;
 	}
 
-	public void setUsuario_admin(Usuario usuario_admin) {
-		this.usuario_admin = usuario_admin;
+	public void setusuarioAdmin(Usuario usuarioAdmin) {
+		this.usuarioAdmin = usuarioAdmin;
 	}
 
 	@Override
@@ -206,14 +231,28 @@ public class Inmueble implements Serializable {
 		return true;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Inmueble [idInmueble=" + idInmueble + ", anioContruccion=" + anioContruccion + ", ascensor=" + ascensor
+		/* Accedemos a los datos de cada objeto y los asignamos al toString*/
+		String provinciaNombre = (provincia != null ? provincia.getNombre() : null);
+		String propietario = (usuario != null ? usuario.getNombre() + ", "+usuario.getApellidos() : null);
+		String admin = (usuarioAdmin != null ? usuario.getNombre() : null);
+				return "Inmueble [idInmueble=" + idInmueble + ", anioContruccion=" + anioContruccion + ", ascensor=" + ascensor
 				+ ", banios=" + banios + ", direccion=" + direccion + ", habitaciones=" + habitaciones + ", metros="
-				+ metros + ", nCatastral=" + nCatastral + ", observaciones=" + observaciones + ", plazaGarage="
-				+ plazaGarage + ", tipoFinca=" + tipoFinca + ", zonaExterior=" + zonaExterior + ", provincia="
-				+ provincia + ", usuario=" + usuario + ", usuario_admin=" + usuario_admin + "]";
+				+ metros + ", numeroCatastral=" + numeroCatastral + ", observaciones=" + observaciones
+				+ ", plazaGarage=" + plazaGarage + ", tipoFinca=" + tipoFinca + ", zonaExterior=" + zonaExterior
+				+ ", provincia=" + provinciaNombre  
+				+ ", usuario="+ propietario
+				+ ", usuarioAdmin=" + admin+ "]";
 	}
+
+
+
+
+
+
 
 
 

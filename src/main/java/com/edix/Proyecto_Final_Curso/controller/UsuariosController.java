@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.edix.Proyecto_Final_Curso.entities.Inmueble;
 import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
 import com.edix.Proyecto_Final_Curso.entities.Usuario;
+import com.edix.Proyecto_Final_Curso.modeloDao.InmuebleDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_usuarioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.UsuarioDao;
 
@@ -29,6 +31,8 @@ public class UsuariosController {
 	private Tipo_usuarioDao tudao;
 	@Autowired
 	private UsuarioDao udao;
+	@Autowired
+	private InmuebleDao idao;
 	
 	@GetMapping("/modulo")
 	public String home(@SessionAttribute("idUsuarioSession") int id, Model model) {
@@ -39,6 +43,22 @@ public class UsuariosController {
 		List<Usuario> inquilinos = udao.buscarTodosInquilinos(id);
 		model.addAttribute("inquilinos",inquilinos);
 		return "app/usuarios";		 		
+	}
+	
+	
+	@GetMapping("/verPropiedades/{id}")
+	public String inmueblesPropietario(@PathVariable("id") int idUsuario, Model model, RedirectAttributes redirect) {
+		Usuario usuario = udao.buscarUsuario(idUsuario);
+		List<Inmueble> inmuebles = idao.buscarTodosPropietario(usuario);
+		if(inmuebles.size() == 0) {
+			redirect.addFlashAttribute("info", "Este usuario actualmente no tiene propiedades");
+			return "redirect:/usuarios/modulo";
+		}else {
+			model.addAttribute("inmuebles", inmuebles);
+			model.addAttribute("usuario", usuario);
+			return "app/inmueblesPropietario";
+		}
+		
 	}
 	
 	@PostMapping("/altaUsuario")
@@ -76,9 +96,8 @@ public class UsuariosController {
 										Model model, RedirectAttributes redirect) {
 	
 		String encriptado = passwordEncoder.encode(clave); 
-		int tipUsuario = Integer.parseInt(tipoDeUsuario);
-		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
-		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, id, rolUsuario);
+		TiposUsuario tipUsuario = tudao.buscarTipoUsuario(Integer.parseInt(tipoDeUsuario));
+		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, id, tipUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");		
 		}else {
@@ -89,21 +108,24 @@ public class UsuariosController {
 	
 	@GetMapping("/eliminar/{id}")
 	public String eliminar(@PathVariable("id") int idUsuario, Model model, RedirectAttributes redirect) {
-		udao.eliminarUsuario(idUsuario);
-		redirect.addFlashAttribute("info", "Usuario se ha eliminado correctamente");
+		Usuario usuario = udao.buscarUsuario(idUsuario);
+		List<Inmueble> inmuebles = idao.buscarTodosPropietario(usuario);
+		if(inmuebles.size() == 0) {
+			udao.eliminarUsuario(idUsuario);
+			redirect.addFlashAttribute("info", "Usuario se ha eliminado correctamente");		
+		}else {
+			redirect.addFlashAttribute("info", "Este usuario tiene propiedades activas, asegurese de eliminar todas sus propiedades primero.");
+		}
 		return "redirect:/usuarios/modulo";
 	}
 	
 	@GetMapping("/verficha/{id}")
 	public String verFichaUsuario(@PathVariable("id") int idUsuario, Model model, RedirectAttributes redirect) {
-		System.out.println("ENTRO");
 		Usuario usuario = udao.buscarUsuario(idUsuario);
-		System.out.println(usuario);
 		if(usuario == null) {
 			redirect.addFlashAttribute("info", "El usuario no existe y no se puede modificar");
 			return "redirect:/usuarios/modulo";
 		}
-		System.out.println("ENVIO");
 		model.addAttribute("usuario", usuario);
 		return "app/usuariosFicha";	
 	}

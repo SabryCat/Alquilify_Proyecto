@@ -24,9 +24,15 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white <% if(itemMenu.equals("Inmuebles")) { %>active<% } %>">
+        <a href="/inmuebles/modulo" class="nav-link text-white <% if(itemMenu.equals("inmuebles")) { %>active<% } %>">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Inmuebles
+        </a>
+      </li>
+      <li>
+        <a href="/alquileres/modulo" class="nav-link text-white <% if(itemMenu.equals("alquileres")) { %>active<% } %>"">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Alquileres
         </a>
       </li>
       <li>
@@ -35,12 +41,7 @@
           Dashboard
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Orders
-        </a>
-      </li>
+
 
     </ul>
     <hr>
