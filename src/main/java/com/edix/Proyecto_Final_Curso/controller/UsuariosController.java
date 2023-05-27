@@ -50,13 +50,11 @@ public class UsuariosController {
 								@RequestParam String telefono,
 								@RequestParam String domicilio,
 								@RequestParam String clave,
-								Model model, RedirectAttributes redirect) {
-		
-		
+								Model model, RedirectAttributes redirect) {		
 		String encriptado = passwordEncoder.encode(clave); 
 		int tipUsuario = Integer.parseInt(tipoDeUsuario);
 		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
-		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 1, rolUsuario);
+		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 0, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");
 			return "redirect:/cuenta";		
@@ -66,20 +64,21 @@ public class UsuariosController {
 	}
 	
 	@PostMapping("/altaNuevosUsuarios")
-	public String altaNuevosUsuarios(@RequestParam String tipoDeUsuario,
-								@RequestParam String nombre,
-								@RequestParam String apellidos,
-								@RequestParam String nif,
-								@RequestParam String email,
-								@RequestParam String telefono,
-								@RequestParam String domicilio,
-								@RequestParam String clave,
-								Model model, RedirectAttributes redirect) {
+	public String altaNuevosUsuarios(@SessionAttribute("idUsuarioSession") int id,
+										@RequestParam String tipoDeUsuario,
+										@RequestParam String nombre,
+										@RequestParam String apellidos,
+										@RequestParam String nif,
+										@RequestParam String email,
+										@RequestParam String telefono,
+										@RequestParam String domicilio,
+										@RequestParam String clave,
+										Model model, RedirectAttributes redirect) {
 	
 		String encriptado = passwordEncoder.encode(clave); 
 		int tipUsuario = Integer.parseInt(tipoDeUsuario);
 		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
-		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 1, rolUsuario);
+		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, id, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");		
 		}else {
@@ -109,4 +108,28 @@ public class UsuariosController {
 		return "app/usuariosFicha";	
 	}
 	
+	@PostMapping("/editarUsuario/{id}")
+	public String editarUsuario(@PathVariable("id") int idUsuario,
+								@RequestParam String nombre,
+								@RequestParam String apellidos,
+								@RequestParam String nif,
+								@RequestParam String email,
+								@RequestParam String telefono,
+								@RequestParam String domicilio,
+								Model model, RedirectAttributes redirect) {
+		Usuario usuario = udao.buscarUsuario(idUsuario);
+		if(usuario==null) {
+			redirect.addFlashAttribute("info", "El usuario no existe y no se puede modificar");
+			return "redirect:/usuarios/modulo";
+		}
+		usuario.setNombre(nombre);
+		usuario.setApellidos(apellidos);
+		usuario.setNif(nif);
+		usuario.setEmail(email);
+		usuario.setTelefono(telefono);
+		usuario.setDomicilio(domicilio);
+		udao.editarUsuario(usuario);
+		redirect.addFlashAttribute("info", "Usuario modificado correctamente");
+		return "redirect:/usuarios/modulo";		
+	}
 }

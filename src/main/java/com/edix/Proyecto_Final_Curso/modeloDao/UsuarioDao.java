@@ -8,6 +8,7 @@ public interface UsuarioDao {
 	Usuario buscarByEmail(String email);
 	Usuario buscarUsuario(int idUsuario);
 	Usuario altaUsuario(Usuario usuario);
+	Usuario editarUsuario(Usuario usuario);
 	List<Usuario> buscarTodosPropietarios(int idUsuario);
 	List<Usuario> buscarTodosInquilinos(int idUsuario);
 	void eliminarUsuario(int idUsuario);

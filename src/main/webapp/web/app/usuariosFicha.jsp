@@ -20,7 +20,7 @@
 			  <div class="col-sm-12 mx-auto">
 				  <!-- Formulario Modificar -->
 						<h5 class="card-title text-center mb-2">Modificar datos de usuario</h5>
-						<form action="/usuarios/altaNuevosUsuarios" method="post" class="col-sm-8 mx-auto">
+						<form action="/usuarios/editarUsuario/${usuario.idUsuario}" method="post" class="col-sm-8 mx-auto">
 
 							<div class="form-floating mb-2">
 							  <input type="text" name="nombre" class="form-control form-control-lg" value="${usuario.nombre}" required/>

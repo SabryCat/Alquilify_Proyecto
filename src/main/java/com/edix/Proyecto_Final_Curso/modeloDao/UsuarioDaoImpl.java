@@ -52,4 +52,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		return urepo.buscarPorEmail(email);
 	}
 
+	@Override
+	public Usuario editarUsuario(Usuario usuario) {
+		if(buscarUsuario(usuario.getIdUsuario())!=null) {
+			return urepo.save(usuario);
+		}
+		return null;
+	}
+
 }
