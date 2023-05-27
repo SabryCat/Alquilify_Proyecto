@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,20 +15,14 @@
 		<jsp:param name="modulo" value="usuarios" />
 	</jsp:include>
 		<!-- cuerpo -->
- 		<div class="container px-4 px-lg-5 mt-4 mb-4">			
-			<div class="row d-flex justify-content-center align-items-start">
-			
-		  	<c:choose>
-		       <c:when test="${info == null}">
-		       </c:when>
-		       <c:otherwise>
-		             	<div class="alert alert-info">
-							${info}
-						</div>
-		       </c:otherwise>
-		  	</c:choose>
-			
+ 		<div class="container px-2 px-lg-2 mt-4 mb-4">			
+			<div class="row d-flex justify-content-center align-items-start">			
 			  <div class="col-sm-12 mx-auto">
+			  	<!-- Alert info -->
+				<jsp:include page="componentesApp/alertInfo.jsp">
+					<jsp:param name="alertInfo" value="${info}" />
+				</jsp:include>
+	  	
 				<!-- tabs -->
 				<ul id="myTab" class="nav nav-tabs" role="tablist">
 				  <li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">PROPIETARIOS</a></li>
