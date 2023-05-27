@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
@@ -30,12 +31,12 @@ public class UsuariosController {
 	private UsuarioDao udao;
 	
 	@GetMapping("/modulo")
-	public String home(Model model) {		
+	public String home(@SessionAttribute("idUsuarioSession") int id, Model model) {
 		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
 		model.addAttribute("tipousuario",tipousuario);
-		List<Usuario> propietarios = udao.buscarTodosPropietarios();
+		List<Usuario> propietarios = udao.buscarTodosPropietarios(id);
 		model.addAttribute("propietarios",propietarios);
-		List<Usuario> inquilinos = udao.buscarTodosInquilinos();
+		List<Usuario> inquilinos = udao.buscarTodosInquilinos(id);
 		model.addAttribute("inquilinos",inquilinos);
 		return "app/usuarios";		 		
 	}
@@ -50,11 +51,12 @@ public class UsuariosController {
 								@RequestParam String domicilio,
 								@RequestParam String clave,
 								Model model, RedirectAttributes redirect) {
-	
+		
+		
 		String encriptado = passwordEncoder.encode(clave); 
 		int tipUsuario = Integer.parseInt(tipoDeUsuario);
 		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
-		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, rolUsuario);
+		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 1, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");
 			return "redirect:/cuenta";		
@@ -77,7 +79,7 @@ public class UsuariosController {
 		String encriptado = passwordEncoder.encode(clave); 
 		int tipUsuario = Integer.parseInt(tipoDeUsuario);
 		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
-		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, rolUsuario);
+		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 1, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");		
 		}else {

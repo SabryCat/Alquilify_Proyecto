@@ -2,6 +2,9 @@ package com.edix.Proyecto_Final_Curso.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +19,13 @@ import com.edix.Proyecto_Final_Curso.entities.Provincia;
 import com.edix.Proyecto_Final_Curso.entities.TipoContrato;
 import com.edix.Proyecto_Final_Curso.entities.TiposServicio;
 import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
+import com.edix.Proyecto_Final_Curso.entities.Usuario;
 import com.edix.Proyecto_Final_Curso.modeloDao.Proveedores_servicioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.ProvinciasDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_contratoDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_servicioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_usuarioDao;
+import com.edix.Proyecto_Final_Curso.modeloDao.UsuarioDao;
 
 /**
  * 
@@ -36,6 +41,8 @@ public class WebController {
 	
 	@Autowired
 	private Tipo_usuarioDao tudao;
+	@Autowired
+	private UsuarioDao udao;
 	@Autowired
 	private Tipo_contratoDao tcdao;
 	@Autowired
@@ -124,7 +131,10 @@ public class WebController {
 	 * @return web html
 	 */		
 	@GetMapping("app/panelControl")
-	public String panelControl() {						
+	public String panelControl(Authentication aut, Model model, HttpSession misession) {
+		Usuario usuario = udao.buscarByEmail(aut.getName());
+		misession.setAttribute("idUsuarioSession", usuario.getIdUsuario());
+		misession.setAttribute("nombreUsuarioSession", usuario.getNombre());
 		return "app/panelControl";		 		
 	}
 }

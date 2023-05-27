@@ -31,13 +31,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
-	public List<Usuario> buscarTodosPropietarios() {
-		return urepo.buscarPropietarios();
+	public List<Usuario> buscarTodosPropietarios(int idUsuario) {
+		return urepo.buscarPropietarios(idUsuario);
 	}
 
 	@Override
-	public List<Usuario> buscarTodosInquilinos() {
-		return urepo.buscarInquilinos();
+	public List<Usuario> buscarTodosInquilinos(int idUsuario) {
+		return urepo.buscarInquilinos(idUsuario);
 	}
 
 	@Override
@@ -45,6 +45,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		if(buscarUsuario(idUsuario)!=null) {
 			urepo.deleteById(idUsuario);
 		}		
+	}
+
+	@Override
+	public Usuario buscarByEmail(String email) {
+		return urepo.buscarPorEmail(email);
 	}
 
 }

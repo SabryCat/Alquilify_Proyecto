@@ -36,6 +36,8 @@ public class Usuario implements Serializable {
 	private int permitido;
 
 	private String telefono;
+	
+	private int id_alta;
 
 	//bi-directional many-to-one association to Alquilere
 	@OneToMany(mappedBy="usuario")
@@ -55,7 +57,7 @@ public class Usuario implements Serializable {
 
 	
 	public Usuario(int idUsuario, String apellidos, String clave, String domicilio, String email, String nif,
-			String nombre, int permitido, String telefono, TiposUsuario tiposUsuario) {
+			String nombre, int permitido, String telefono, int id_alta, TiposUsuario tiposUsuario) {
 		super();
 		this.idUsuario = idUsuario;
 		this.apellidos = apellidos;
@@ -66,6 +68,7 @@ public class Usuario implements Serializable {
 		this.nombre = nombre;
 		this.permitido = permitido;
 		this.telefono = telefono;
+		this.id_alta= id_alta;
 		this.tiposUsuario = tiposUsuario;
 	}
 
@@ -125,7 +128,7 @@ public class Usuario implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
 	public int getPermitido() {
 		return this.permitido;
 	}
@@ -141,6 +144,16 @@ public class Usuario implements Serializable {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+	public int getId_alta() {
+		return id_alta;
+	}
+
+
+	public void setId_alta(int id_alta) {
+		this.id_alta = id_alta;
+	}
+
 
 	public List<Alquilere> getAlquileres() {
 		return this.alquileres;
@@ -219,9 +232,10 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", apellidos=" + apellidos + ", clave=" + clave + ", domicilio="
 				+ domicilio + ", email=" + email + ", nif=" + nif + ", nombre=" + nombre + ", permitido=" + permitido
-				+ ", telefono=" + telefono + ", alquileres=" + alquileres + ", inmuebles=" + inmuebles
-				+ "]";
+				+ ", telefono=" + telefono + ", id_alta=" + id_alta + ", alquileres=" + alquileres + ", inmuebles="
+				+ inmuebles + "]";
 	}
+
 
 
 
