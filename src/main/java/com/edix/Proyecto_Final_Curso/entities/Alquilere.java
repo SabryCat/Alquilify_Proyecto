@@ -59,6 +59,7 @@ public class Alquilere implements Serializable {
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Inmueble
+	@ManyToOne
 	@JoinColumn(name="id_inmueble")
 	private Inmueble inmueble;
 	
@@ -89,11 +90,13 @@ public class Alquilere implements Serializable {
 
 	@Override
 	public String toString() {
+		String inquilino = (usuario != null ? usuario.getNombre() + ", "+usuario.getApellidos() : null);
+		String tipoDeContrato = (tipoContrato != null ? tipoContrato.getTipo() : null);
 		return "Alquilere [idAlquiler=" + idAlquiler + ", actualizacionRenta=" + actualizacionRenta + ", fechaComienzo="
 				+ fechaComienzo + ", fechaFin=" + fechaFin + ", fianza=" + fianza + ", importe=" + importe
 				+ ", importeFianza=" + importeFianza + ", observaciones=" + observaciones + ", renovacion=" + renovacion
-				+ ", alquilerServicios=" + alquilerServicios + ", tipoContrato=" + tipoContrato + ", usuario=" + usuario
-				+ ", inmueble=" + inmueble + "]";
+				+ ", alquilerServicios=" + alquilerServicios + ", tipoContrato=" + tipoDeContrato + ", usuario=" + inquilino
+				+ "]";
 	}
 
 	public int getIdAlquiler() {
@@ -206,11 +209,11 @@ public class Alquilere implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Inmueble getInmuebles() {
+	public Inmueble getInmueble() {
 		return inmueble;
 	}
 
-	public void setInmuebles(Inmueble inmueble) {
+	public void setInmueble(Inmueble inmueble) {
 		this.inmueble = inmueble;
 	}
 

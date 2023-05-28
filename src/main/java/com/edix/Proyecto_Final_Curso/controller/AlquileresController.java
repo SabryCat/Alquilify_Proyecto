@@ -1,7 +1,5 @@
 package com.edix.Proyecto_Final_Curso.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +45,11 @@ public class AlquileresController {
 		model.addAttribute("inquilinos",inquilinos);
 		List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
 		model.addAttribute("tiposcontratos",tiposcontratos);
+		List<Alquilere> contratos = adao.buscarTodosPorAdmin(administrador);
+		
+		//System.out.println(contratos);	
+		
+		model.addAttribute("contratos",contratos);
 		return "app/alquileres";
 	}
 	
@@ -63,23 +66,20 @@ public class AlquileresController {
 									@RequestParam String observaciones,
 									Model model, RedirectAttributes redirect
 			) {
-		//actualizacionRenta
-		// cast int a double
-		
+
+		//Obtenenmos los objetos según id
 		Inmueble inmuebleAlquilado = idao.buscarInmueble(Integer.parseInt(idInmueble));
 		Usuario inquilino = udao.buscarUsuario(Integer.parseInt(usuarioInquilino));
 		TipoContrato contrato = tcdao.buscarTipoContrato(Integer.parseInt(tipoContrato));
-		
-		
+		//Parseamos fechas con una funcion personalizada
 		Date fechaC = DateUtils.parseStringToDate(fechaComienzo);
-		Date fechaF = DateUtils.parseStringToDate(fechaComienzo);
-		
-		
+		Date fechaF = DateUtils.parseStringToDate(fechaFin);
+		//Damos de alta el nuevo contrato		
 		Alquilere nuevoContrato = new Alquilere(0, 0.0,fechaC,fechaF,fianza,
 				(float) importe,(float) importeFianza,observaciones,
 				renovacion,contrato,inquilino,inmuebleAlquilado
 				);
-		
+		//Comprobamos que se dio de alta correctamente
 		if(adao.altaAlquiler(nuevoContrato)==null) {
 			redirect.addFlashAttribute("info", "El contrato ya existe en nuestra plataforma");		
 		}else {

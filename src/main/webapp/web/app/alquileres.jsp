@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,38 +36,38 @@
 						  <thead>
 						    <tr>
 						      <th scope="col">#</th>
+						      <th scope="col">Tipo</th>
+						      <th scope="col" style="width: 100px;">Inicio</th>
+						      <th scope="col" style="width: 100px;">Fin</th>						      
+						      <th scope="col">Propiedad</th>
 						      <th scope="col">Propietario</th>
-						      <th scope="col">Nº catastral</th>
-						      <th scope="col">Año</th>
-						      <th scope="col">Provincia</th>
-						      <th scope="col">Dirección</th>
-						      <th scope="col">Metros</th>
+						      <th scope="col">Inquilino</th>
 						      <th scope="col">Servicios</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-							 <!--<c:forEach var="ele" items="${inmuebles}">
+							 <c:forEach var="ele" items="${contratos}">
 								<tr>
-								 	<th scope="row">${ele.idInmueble}</th>
+								 	<th scope="row">${ele.idAlquiler}</th>
+								 	<td> ${ele.tipoContrato.tipo}</td>
+								 	<td><fmt:formatDate value="${ele.fechaComienzo}" pattern="dd-MM-yyyy" /></td>
+									<td><fmt:formatDate value="${ele.fechaFin}" pattern="dd-MM-yyyy" /></td>
+									<td> ${ele.inmueble.tipoFinca} - ${ele.inmueble.direccion}</td>
+									<td> ${ele.inmueble.usuario.nombre}, ${ele.inmueble.usuario.apellidos}</td>
 									<td> ${ele.usuario.nombre}, ${ele.usuario.apellidos}</td>
-									<td> ${ele.numeroCatastral}</td>
-									<td> ${ele.anioContruccion}</td>
-									<td> ${ele.provincia.nombre}</td>
-									<td> ${ele.direccion}</td>
-									<td> ${ele.metros}</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="propiedades" style="margin-left: 20%;">
-											<a href="/inmuebles/servicios/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">ver</a>
+											<a href="/inmuebles/servicios/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">ver</a>
 										</div>
 									</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/inmuebles/verficha/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">Editar</a>
-											<a href="/inmuebles/eliminar/${ele.idInmueble}"  type="button" class="btn btn-outline-warning">Eliminar</a>
+											<a href="/inmuebles/verficha/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">Editar</a>
+											<a href="/inmuebles/eliminar/${ele.idAlquiler}"  type="button" class="btn btn-outline-warning">Eliminar</a>
 										</div>
 									</td>
 								</tr>	 
-							</c:forEach>-->
+							</c:forEach>
 						 </tbody>
 					</table>
 				  </div>
