@@ -53,7 +53,9 @@ main {
 .btn-toggle-nav a:focus {
   background-color: #d2f4ea;
 }
-
+.alquilify-bg {
+    background: #FF7220 !important;
+}
 .scrollarea {
   overflow-y: auto;
 }

@@ -21,6 +21,7 @@
 			  	<!-- Alert info -->
 				<jsp:include page="componentesApp/alertInfo.jsp">
 					<jsp:param name="alertInfo" value="${info}" />
+					<jsp:param name="alertTipo" value="${tipo}" />
 				</jsp:include>
 	  	
 				<!-- tabs -->

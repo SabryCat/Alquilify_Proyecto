@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.edix.Proyecto_Final_Curso.entities.Alquilere;
 import com.edix.Proyecto_Final_Curso.entities.Inmueble;
 import com.edix.Proyecto_Final_Curso.entities.Provincia;
 import com.edix.Proyecto_Final_Curso.entities.Usuario;
+import com.edix.Proyecto_Final_Curso.modeloDao.AlquileresDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.InmuebleDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.ProvinciasDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.UsuarioDao;
@@ -29,6 +31,8 @@ public class InmueblesController {
 	private ProvinciasDao pdao;
 	@Autowired
 	private InmuebleDao idao;
+	@Autowired
+	private AlquileresDao adao;
 	
 	@GetMapping("/modulo")
 	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
@@ -40,6 +44,23 @@ public class InmueblesController {
 		List<Provincia> provincias = pdao.buscarTodas();
 		model.addAttribute("provincias", provincias);
 		return "app/inmuebles";
+	}
+	
+	@GetMapping("/verContratos/{id}")
+	public String inmueblesContratos(@PathVariable("id") int idInmueble, Model model, RedirectAttributes redirect) {
+		Inmueble inmueble = idao.buscarInmueble(idInmueble);
+		List<Alquilere> contratos = adao.buscarAlquilerPorInmueble(inmueble);
+		System.out.println(contratos);
+		if(contratos.size() == 0) {
+			redirect.addFlashAttribute("info", "Este inmueble no tiene contrato activo");
+			redirect.addFlashAttribute("tipo", "danger");
+			return "redirect:/inmuebles/modulo";
+		}else {
+			model.addAttribute("inmueble",inmueble);
+			model.addAttribute("contratos",contratos);
+			model.addAttribute("linkmenu", "inmuebles");
+			return "app/alquileresInmueble";
+		}
 	}
 	
 	@PostMapping("/altaNuevosInmueble")
@@ -68,18 +89,23 @@ public class InmueblesController {
 										administrador);
 		
 		if(idao.altaInmueble(inmueble)==null) {
-			redirect.addFlashAttribute("info", "El inmueble ya existe en nuestra plataforma");		
+			redirect.addFlashAttribute("info", "El inmueble ya existe en nuestra plataforma");
+			redirect.addFlashAttribute("tipo", "danger");
 		}else {
 			redirect.addFlashAttribute("info", "Inmueble dado de alta correctamente");
+			redirect.addFlashAttribute("tipo", "success");
 		}
 		return "redirect:/inmuebles/modulo";
 	}
 	
 	@GetMapping("/verficha/{id}")
-	public String verFichaInmueble(@PathVariable("id") int idInmueble, @SessionAttribute("idUsuarioSession") int idAdmin,Model model, RedirectAttributes redirect) {
+	public String verFichaInmueble(@PathVariable("id") int idInmueble, 
+									@SessionAttribute("idUsuarioSession") int idAdmin,
+									Model model, RedirectAttributes redirect) {
 		Inmueble inmueble = idao.buscarInmueble(idInmueble);
 		if(inmueble == null) {
-			redirect.addFlashAttribute("info", "El inmueble no existe y no se puede modificar");
+			redirect.addFlashAttribute("info", "El inmueble no existe y no se puede ver");
+			redirect.addFlashAttribute("tipo", "danger");
 			return "redirect:/inmuebles/modulo";
 		}
 		model.addAttribute("inmueble", inmueble);
@@ -91,7 +117,7 @@ public class InmueblesController {
 	}
 	
 	@PostMapping("/editarInmueble/{id}")
-	public String editarUsuario(@PathVariable("id") int idInmueble,
+	public String editarInmueble(@PathVariable("id") int idInmueble,
 									@RequestParam String propietario,
 									@RequestParam String numeroCatastral,
 									@RequestParam String anioContruccion,
@@ -110,6 +136,7 @@ public class InmueblesController {
 		Inmueble inmueble = idao.buscarInmueble(idInmueble);
 		if(inmueble==null) {
 			redirect.addFlashAttribute("info", "El inmueble no existe y no se puede modificar");
+			redirect.addFlashAttribute("tipo", "danger");
 			return "redirect:/inmuebles/modulo";
 		}
 		
@@ -131,9 +158,23 @@ public class InmueblesController {
 		inmueble.setObservaciones(observaciones);
 		idao.editarInmueble(inmueble);
 		redirect.addFlashAttribute("info", "Inmueble modificado correctamente");
+		redirect.addFlashAttribute("tipo", "success");
 		return "redirect:/inmuebles/modulo";	
 	}
 	
-	
+	@GetMapping("/eliminar/{id}")
+	public String eliminarInmueble(@PathVariable("id") int idInmueble, Model model, RedirectAttributes redirect) {
+		Inmueble inmueble = idao.buscarInmueble(idInmueble);
+		List<Alquilere> contrato = adao.buscarAlquilerPorInmueble(inmueble);		
+		if(contrato.size() == 0) {
+			idao.eliminarInmueble(idInmueble);
+			redirect.addFlashAttribute("info", "Inmueble se ha eliminado correctamente");
+			redirect.addFlashAttribute("tipo", "success");
+		}else {
+			redirect.addFlashAttribute("info", "Este inmueble tiene contratos activos, asegurese de eliminarlos primero.");
+			redirect.addFlashAttribute("tipo", "danger");
+		}
+		return "redirect:/inmuebles/modulo";
+	}
 
 }

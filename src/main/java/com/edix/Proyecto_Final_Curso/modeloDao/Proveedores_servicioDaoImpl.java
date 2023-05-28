@@ -17,7 +17,7 @@ public class Proveedores_servicioDaoImpl implements Proveedores_servicioDao{
 	}
 
 	@Override
-	public ProveedoresServicio buscarEntidadServicio(int idProveedor) {
+	public ProveedoresServicio buscarProveedorServicio(int idProveedor) {
 		return esrepo.findById(idProveedor).orElse(null);
 	}
 

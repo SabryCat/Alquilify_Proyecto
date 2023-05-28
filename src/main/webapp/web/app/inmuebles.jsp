@@ -20,6 +20,7 @@
 			  	<!-- Alert info -->
 				<jsp:include page="componentesApp/alertInfo.jsp">
 					<jsp:param name="alertInfo" value="${info}" />
+					<jsp:param name="alertTipo" value="${tipo}" />
 				</jsp:include>
 	  	
 				<!-- tabs -->
@@ -41,7 +42,7 @@
 						      <th scope="col">Provincia</th>
 						      <th scope="col">Dirección</th>
 						      <th scope="col">Metros</th>
-						      <th scope="col">Servicios</th>
+						      <th scope="col">Contratos</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -56,7 +57,7 @@
 									<td> ${ele.metros}</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="propiedades" style="margin-left: 20%;">
-											<a href="/inmuebles/servicios/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">ver</a>
+											<a href="/inmuebles/verContratos/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">ver</a>
 										</div>
 									</td>
 									<td>

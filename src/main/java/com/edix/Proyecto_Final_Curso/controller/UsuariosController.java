@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.edix.Proyecto_Final_Curso.entities.Alquilere;
 import com.edix.Proyecto_Final_Curso.entities.Inmueble;
 import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
 import com.edix.Proyecto_Final_Curso.entities.Usuario;
+import com.edix.Proyecto_Final_Curso.modeloDao.AlquileresDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.InmuebleDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_usuarioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.UsuarioDao;
@@ -33,6 +35,8 @@ public class UsuariosController {
 	private UsuarioDao udao;
 	@Autowired
 	private InmuebleDao idao;
+	@Autowired
+	private AlquileresDao adao;
 	
 	@GetMapping("/modulo")
 	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
@@ -44,21 +48,34 @@ public class UsuariosController {
 		model.addAttribute("inquilinos",inquilinos);
 		return "app/usuarios";		 		
 	}
-	
-	
+		
 	@GetMapping("/verPropiedades/{id}")
 	public String inmueblesPropietario(@PathVariable("id") int idUsuario, Model model, RedirectAttributes redirect) {
 		Usuario usuario = udao.buscarUsuario(idUsuario);
 		List<Inmueble> inmuebles = idao.buscarTodosPropietario(usuario);
 		if(inmuebles.size() == 0) {
 			redirect.addFlashAttribute("info", "Este usuario actualmente no tiene propiedades");
+			redirect.addFlashAttribute("tipo", "danger");
 			return "redirect:/usuarios/modulo";
 		}else {
 			model.addAttribute("inmuebles", inmuebles);
 			model.addAttribute("usuario", usuario);
 			return "app/inmueblesPropietario";
-		}
-		
+		}		
+	}
+	
+	@GetMapping("/verAlquileres/{id}")
+	public String contratosInquilino(@PathVariable("id") int idUsuario, Model model, RedirectAttributes redirect) {
+		Usuario inquilino = udao.buscarUsuario(idUsuario);
+		List<Alquilere> contratos = adao.buscarTodosPorInquilino(inquilino);
+		if(contratos.size() == 0) {
+			redirect.addFlashAttribute("info", "Este usuario actualmente no tiene contratos de alquiler");
+			redirect.addFlashAttribute("tipo", "danger");
+			return "redirect:/usuarios/modulo";
+		}else {
+			model.addAttribute("contratos",contratos);
+			return "app/alquileresInquilino";
+		}	
 	}
 	
 	@PostMapping("/altaUsuario")
@@ -77,6 +94,7 @@ public class UsuariosController {
 		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 0, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");
+			redirect.addFlashAttribute("tipo", "danger");
 			return "redirect:/cuenta";		
 		}else {
 			return "redirect:/app/panelControl";
@@ -99,9 +117,11 @@ public class UsuariosController {
 		TiposUsuario tipUsuario = tudao.buscarTipoUsuario(Integer.parseInt(tipoDeUsuario));
 		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, idAdmin, tipUsuario);
 		if(udao.altaUsuario(usuario)==null) {
-			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");		
+			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");
+			redirect.addFlashAttribute("tipo", "danger");
 		}else {
 			redirect.addFlashAttribute("info", "Usuario dado de alta correctamente");
+			redirect.addFlashAttribute("tipo", "success");
 		}
 		return "redirect:/usuarios/modulo";
 	}
@@ -112,9 +132,11 @@ public class UsuariosController {
 		List<Inmueble> inmuebles = idao.buscarTodosPropietario(usuario);
 		if(inmuebles.size() == 0) {
 			udao.eliminarUsuario(idUsuario);
-			redirect.addFlashAttribute("info", "Usuario se ha eliminado correctamente");		
+			redirect.addFlashAttribute("info", "Usuario se ha eliminado correctamente");
+			redirect.addFlashAttribute("tipo", "success");
 		}else {
 			redirect.addFlashAttribute("info", "Este usuario tiene propiedades activas, asegurese de eliminar todas sus propiedades primero.");
+			redirect.addFlashAttribute("tipo", "danger");
 		}
 		return "redirect:/usuarios/modulo";
 	}
@@ -124,6 +146,7 @@ public class UsuariosController {
 		Usuario usuario = udao.buscarUsuario(idUsuario);
 		if(usuario == null) {
 			redirect.addFlashAttribute("info", "El usuario no existe y no se puede modificar");
+			redirect.addFlashAttribute("tipo", "danger");
 			return "redirect:/usuarios/modulo";
 		}
 		model.addAttribute("usuario", usuario);
@@ -142,6 +165,7 @@ public class UsuariosController {
 		Usuario usuario = udao.buscarUsuario(idUsuario);
 		if(usuario==null) {
 			redirect.addFlashAttribute("info", "El usuario no existe y no se puede modificar");
+			redirect.addFlashAttribute("tipo", "danger");
 			return "redirect:/usuarios/modulo";
 		}
 		usuario.setNombre(nombre);
@@ -152,6 +176,7 @@ public class UsuariosController {
 		usuario.setDomicilio(domicilio);
 		udao.editarUsuario(usuario);
 		redirect.addFlashAttribute("info", "Usuario modificado correctamente");
+		redirect.addFlashAttribute("tipo", "success");
 		return "redirect:/usuarios/modulo";		
 	}
 }

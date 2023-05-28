@@ -7,5 +7,5 @@ import com.edix.Proyecto_Final_Curso.entities.ProveedoresServicio;
 public interface Proveedores_servicioDao {
 	
 	List<ProveedoresServicio> buscarTodos();
-	ProveedoresServicio buscarEntidadServicio(int idProveedor);
+	ProveedoresServicio buscarProveedorServicio(int idProveedor);
 }

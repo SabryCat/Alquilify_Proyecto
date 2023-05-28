@@ -47,7 +47,9 @@ public class InmuebleDaoImpl implements InmuebleDao {
 
 	@Override
 	public void eliminarInmueble(int idInmueble) {
-		// TODO Auto-generated method stub
+		if(buscarInmueble(idInmueble)!=null) {
+			irepo.deleteById(idInmueble);
+		}
 		
 	}
 

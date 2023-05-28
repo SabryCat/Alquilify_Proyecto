@@ -33,6 +33,7 @@
 			  	<!-- Alert info -->
 				<jsp:include page="componentesApp/alertInfo.jsp">
 					<jsp:param name="alertInfo" value="${info}" />
+					<jsp:param name="alertTipo" value="${tipo}" />
 				</jsp:include>
 	  	
 				<!-- tabs -->
@@ -42,7 +43,7 @@
 				</ul>
 				
 				<div class="tab-content">
-				<!-- Listado Propietarios -->
+				<!-- Listado Inmuebles -->
 				 <div class="p-1 tab-pane fade show active etab-p1">
 		    		<table class="table table-striped">
 						  <thead>
@@ -53,7 +54,6 @@
 						      <th scope="col">Provincia</th>
 						      <th scope="col">Dirección</th>
 						      <th scope="col">Metros</th>
-						      <th scope="col">Servicios</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -66,14 +66,8 @@
 									<td> ${ele.direccion}</td>
 									<td> ${ele.metros}</td>
 									<td>
-										<div class="btn-group btn-group-sm" role="group" aria-label="propiedades" style="margin-left: 20%;">
-											<a href="/inmuebles/servicios/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">ver</a>
-										</div>
-									</td>
-									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/inmuebles/verficha/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">Editar</a>
-											<a href="/inmuebles/eliminar/${ele.idInmueble}"  type="button" class="btn btn-outline-warning">Eliminar</a>
+											<a href="/inmuebles/verficha/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">Editar</a>						
 										</div>
 									</td>
 								</tr>	 

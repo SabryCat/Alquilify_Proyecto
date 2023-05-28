@@ -21,6 +21,7 @@
 			  	<!-- Alert info -->
 				<jsp:include page="componentesApp/alertInfo.jsp">
 					<jsp:param name="alertInfo" value="${info}" />
+					<jsp:param name="alertTipo" value="${tipo}" />
 				</jsp:include>
 	  	
 				<!-- tabs -->
@@ -57,13 +58,14 @@
 									<td> ${ele.usuario.nombre}, ${ele.usuario.apellidos}</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="propiedades" style="margin-left: 20%;">
-											<a href="/inmuebles/servicios/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">ver</a>
+											<a href="/alquileres/verServicios/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">ver</a>
 										</div>
 									</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/inmuebles/verficha/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">Editar</a>
-											<a href="/inmuebles/eliminar/${ele.idAlquiler}"  type="button" class="btn btn-outline-warning">Eliminar</a>
+											<a href="/alquileres/verContrato/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">Editar</a>
+											<a href="/alquileres/eliminar/${ele.idAlquiler}"  type="button" class="btn btn-warning">Eliminar</a>
+											<!-- btn-outline-warning -->
 										</div>
 									</td>
 								</tr>	 

@@ -51,6 +51,18 @@ public class AlquilerServicio implements Serializable {
 	public AlquilerServicio() {
 	}
 
+	public AlquilerServicio(int idAlquilerServicio, String baja, Date fechaContratacion, Date fechaFinalizacion,
+			String numeroContratoServicio, Alquilere alquilere, ProveedoresServicio proveedoresServicio) {
+		super();
+		this.idAlquilerServicio = idAlquilerServicio;
+		this.baja = baja;
+		this.fechaContratacion = fechaContratacion;
+		this.fechaFinalizacion = fechaFinalizacion;
+		this.numeroContratoServicio = numeroContratoServicio;
+		this.alquilere = alquilere;
+		this.proveedoresServicio = proveedoresServicio;
+	}
+
 	public int getIdAlquilerServicio() {
 		return this.idAlquilerServicio;
 	}
