@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,16 +25,25 @@
 					<jsp:param name="alertTipo" value="${tipo}" />
 				</jsp:include>
 	  	
+	  	
 				<!-- tabs -->
 				<ul id="myTab" class="nav nav-tabs" role="tablist">
-				  <li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">PROPIETARIOS</a></li>
-				  <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">INQUILINOS</a></li>
-				  <li class="nav-item"><a class="nav-link" href="#tab-3" data-bs-target=".etab-p3" data-bs-toggle="tab">ALTAS</a></li>			  
+					<sec:authorize access="hasAuthority('Administrador')">
+				  		<li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">PROPIETARIOS</a></li>
+				 	</sec:authorize>
+				 	
+				  		<li class="nav-item"><a class="nav-link <sec:authorize access="hasAuthority('Propietario')">active show</sec:authorize>" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">INQUILINOS</a></li>
+				  	
+				  	<sec:authorize access="hasAuthority('Administrador')">
+				  		<li class="nav-item"><a class="nav-link" href="#tab-3" data-bs-target=".etab-p3" data-bs-toggle="tab">ALTAS</a></li>			  
+					</sec:authorize>
 				</ul>
 				
 				<div class="tab-content">
-				<!-- Listado Propietarios -->
-				 <div class="p-3 tab-pane fade show active etab-p1">
+				
+				  <!-- Listado Propietarios -->
+				  <sec:authorize access="hasAuthority('Administrador')">
+				  <div class="p-3 tab-pane fade show active etab-p1">
 		    		<table class="table table-striped">
 						  <thead>
 						    <tr>
@@ -73,8 +83,10 @@
 						 </tbody>
 					</table>
 				  </div>
+				  </sec:authorize>
+				  
 				  <!-- Listado Inquilinos -->
-				  <div class="p-3 tab-pane fade etab-p2">
+				  <div class="p-3 tab-pane fade etab-p2 <sec:authorize access="hasAuthority('Propietario')">show active</sec:authorize>">
 		    		<table class="table table-striped">
 						  <thead>
 						    <tr>
@@ -114,7 +126,9 @@
 						</tbody>
 					</table>
 				  </div>
+				  
 				  <!-- Formulario Alta -->
+				  <sec:authorize access="hasAuthority('Administrador')">
 				  <div class="p-3 tab-pane fade etab-p3">
 						<h5 class="card-title text-center mb-2">Registrar nuevo usuario</h5>
 						<form action="/usuarios/altaNuevosUsuarios" method="post" class="col-sm-8 mx-auto">
@@ -169,6 +183,7 @@
 							</div>
 						</form>
 				  </div>
+				  </sec:authorize>
 				  
 				</div>
 				<!-- fin tabs -->

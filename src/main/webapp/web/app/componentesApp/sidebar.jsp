@@ -17,31 +17,38 @@
           Home
         </a>
       </li>
+      
+      <sec:authorize access="hasAuthority('Administrador') or hasAuthority('Propietario')">
       <li>
         <a href="/usuarios/modulo" class="nav-link text-white <% if(itemMenu.equals("usuarios")) { %>alquilify-bg<% } %>">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           Usuarios
         </a>
-      </li>
+      </li>      
+      </sec:authorize>
+      
       <li>
         <a href="/inmuebles/modulo" class="nav-link text-white <% if(itemMenu.equals("inmuebles")) { %>alquilify-bg<% } %>">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Inmuebles
         </a>
       </li>
+      
       <li>
         <a href="/alquileres/modulo" class="nav-link text-white <% if(itemMenu.equals("alquileres")) { %>alquilify-bg<% } %>">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Alquileres
         </a>
       </li>
+      
+       <sec:authorize access="hasAuthority('Administrador') or hasAuthority('Inquilino')">
       <li>
         <a href="/servicios/modulo" class="nav-link text-white <% if(itemMenu.equals("servicios")) { %>alquilify-bg<% } %>"">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Servicios
         </a>
       </li>
-
+	 </sec:authorize>
 
     </ul>
     <hr>

@@ -36,7 +36,7 @@ public class DataUserConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/bootstrap/**", "/images/**", "/css/**", "/js/**").permitAll()
 		.antMatchers("/").permitAll()
 		.antMatchers("/index").permitAll()
-		.antMatchers("/app/panelControl").hasAnyAuthority("Administrador", "Propietario")
+		.antMatchers("/app/panelControl").hasAnyAuthority("Administrador", "Propietario", "Inquilino")
 		//.anyRequest().authenticated()
 		.and().formLogin().permitAll();
 		// El formulario de Login no requiere autenticacion
