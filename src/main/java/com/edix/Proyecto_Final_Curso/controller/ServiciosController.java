@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.edix.Proyecto_Final_Curso.entities.AlquilerServicio;
+import com.edix.Proyecto_Final_Curso.entities.TiposServicio;
 import com.edix.Proyecto_Final_Curso.entities.Usuario;
 import com.edix.Proyecto_Final_Curso.modeloDao.AlquileresServiciosDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.DateUtils;
+import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_servicioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.UsuarioDao;
 @RequestMapping("/servicios")
 @Controller
@@ -26,14 +28,20 @@ public class ServiciosController {
 	private UsuarioDao udao;
 	@Autowired
 	private AlquileresServiciosDao asdao;
+	@Autowired
+	private Tipo_servicioDao tsdao;
 	
 	@GetMapping("/modulo")
 	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
 		Usuario administrador = udao.buscarUsuario(idAdmin);
 		List<AlquilerServicio> servicios = asdao.buscarTodosPorAdministrador(administrador);
 		model.addAttribute("servicios", servicios);
+		List<TiposServicio> tiposservicios = tsdao.buscarTodos();
+		model.addAttribute("tiposservicios", tiposservicios);
 		return "app/servicios";
+						
 	}
+	
 	
 	@GetMapping("/verficha/{id}")
 	public String verFichaServicio(@PathVariable("id") int idServicio, 

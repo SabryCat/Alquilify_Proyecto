@@ -16,7 +16,7 @@
 					
             <div class="row gx-4 gx-lg-5 align-items-center alquilify-mb">
 			    <div class="col-lg-12 alquilify-mt">
-                    <h1 class="font-weight-light">Business Name or Tagline</h1>		
+                    <h1 class="font-weight-light">Envia tus datos nosotros te llamamos</h1>		
 				</div>
             </div>
 			
@@ -44,7 +44,7 @@
 						
 						<!-- Mensaje -->
 						<div class="mb-3">
-							<label class="form-label" for="mensaje">Message</label>
+							<label class="form-label" for="mensaje">Mensaje</label>
 							<textarea class="form-control" id="mensaje" type="text" placeholder="Mensaje" style="height: 10rem;" ></textarea>
 						</div>
 
@@ -54,9 +54,10 @@
 						</div>
 					</form> 
 				</div>
-				<div class="col-lg-3">
-					<h1 class="font-weight-light">Business Name or Tagline</h1>
-					<p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+				<div class="col-lg-3" style="margin-top: -200px;">
+					<h1 class="font-weight-light">Alquilify</h1>
+					<p>Estamos aquí para responder a todas tus preguntas, atender tus inquietudes y proporcionarte el mejor servicio posible. 
+					Por favor, no dudes en comunicarte con nosotros.</p>
 				</div>
 			</div>
 

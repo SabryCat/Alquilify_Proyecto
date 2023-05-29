@@ -64,8 +64,6 @@
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
 											<a href="/alquileres/verContrato/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">Editar</a>
-											<a href="/alquileres/eliminar/${ele.idAlquiler}"  type="button" class="btn btn-warning">Eliminar</a>
-											<!-- btn-outline-warning -->
 										</div>
 									</td>
 								</tr>	 

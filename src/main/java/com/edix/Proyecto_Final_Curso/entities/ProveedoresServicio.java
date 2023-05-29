@@ -29,6 +29,13 @@ public class ProveedoresServicio implements Serializable {
 	public ProveedoresServicio() {
 	}
 
+	public ProveedoresServicio(int idProveedor, String nombre, TiposServicio tiposServicio) {
+		super();
+		this.idProveedor = idProveedor;
+		this.nombre = nombre;
+		this.tiposServicio = tiposServicio;
+	}
+
 	public int getIdProveedor() {
 		return this.idProveedor;
 	}

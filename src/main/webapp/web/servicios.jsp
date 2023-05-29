@@ -15,8 +15,10 @@
 		
 			<div class="card bg-light alquilify-mt alquilify-mb py-4 text-center">
                 <div class="card-body">
-				<h3>This call to action card is a great place to showcase some important information or display a clever tagline!</h3>
-				<p class=" m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+				<h3>Bienvenido a Alquilify: Tu Solución en Alquiler de Propiedades</h3>
+				<p class=" m-0">Encuentra tu hogar perfecto con Alquilify, la plataforma líder en el alquiler de propiedades. Nuestra 
+				misión es facilitar y agilizar el proceso de alquiler, brindándote una experiencia sin complicaciones y garantizando
+				 la satisfacción tanto de propietarios como de inquilinos.</p>
 				<p class=" m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
 				</div>
             </div>

@@ -26,10 +26,8 @@
 	  	
 				<!-- tabs -->
 				<ul id="myTab" class="nav nav-tabs" role="tablist">
-				  <li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">SERVICIOS</a></li>
-				  <!--
-				  <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">ALTAS</a></li>	  
-				-->
+				  <li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">TOTAL SERVICIOS</a></li>
+				  <li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">ALTAS PROVEEDORES</a></li>	  
 				</ul>
 				
 				<div class="tab-content">
@@ -64,9 +62,7 @@
 									</td>-->
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/servicios/verficha/${ele.idAlquilerServicio}"  type="button" class="btn btn-outline-primary">Editar</a>
-											<a href="/servicios/eliminar/${ele.idAlquilerServicio}"  type="button" class="btn btn-warning">Eliminar</a>
-																														<!-- btn-outline-warning -->
+											<a href="/servicios/verficha/${ele.idAlquilerServicio}"  type="button" class="btn btn-outline-primary">Editar</a>																		<!-- btn-outline-warning -->
 										</div>
 									</td>
 								</tr>	 
@@ -76,44 +72,26 @@
 				  </div>
 
 				  <div class="p-2 tab-pane fade etab-p2">
-						<h5 class="card-title text-center mb-2">Registrar Servicio</h5>
-						<form action="/alquileres/altaNuevosServicios/${contrato.idAlquiler}" method="post" class="col-sm-8 mx-auto">
+						<h5 class="card-title text-center mb-2">Registrar Nuevo Proveedor de Servicio</h5>
+						<form action="/proveedores/altaNuevo" method="post" class="col-sm-8 mx-auto">
 							
-							<!--  <div class="form-floating mb-2">
-								<select name="proveedoresServicio" class="form-select">
-									<option>Seleccionar proveedor</option>
-									<c:forEach var="ele" items="${proveedores}">
-										<option value="${ele.idProveedor}"> ${ele.nombre}</option>
+							<div class="form-floating mb-4">
+								<select name="idServicio" class="form-select">
+									<option>Seleccionar tipo de Servicio</option>
+									<c:forEach var="ele" items="${tiposservicios}">
+										<option value="${ele.idTipoServicio}"> ${ele.tipo}</option>
 									</c:forEach>
 								</select>
-							</div>-->
+							</div>
 							
 							<div class="form-floating mb-2">
-							  <input type="text" name="numeroContratoServicio" class="form-control form-control-lg" required/>
-							  <label class="form-label" for="numeroContratoServicio">Nº Contrato servicio</label>
+							  <input type="text" name="nombre" class="form-control form-control-lg" required/>
+							  <label class="form-label" for="nombre">Nombre proveedor</label>
 							</div>
-
-							<div class="form-floating mb-2">
-							  <input type="date" name="fechaContratacion" class="form-control form-control-lg" required/>
-							  <label class="form-label" for="fechaContratacion">Fecha comienzo</label>
-							</div>
-
-							<div class="form-floating mb-2">
-							  <input type="date" name="fechaFinalizacion" class="form-control form-control-lg" required/>
-							  <label class="form-label" for="fechaFinalizacion">Fecha fin</label>
-							</div>
-			
-							<div class="form-floating mb-2">
-								<select name="baja" class="form-select" required>
-									<option>Estado de baja</option>
-									<option value="SI">SI</option>
-									<option value="NO">NO</option>
-								</select>
-							</div>	
 
 							<div class="d-grid">
 								<button class="p-3 btn text-white btn-primary text-uppercase fw-bold" type="submit">
-								Registrar servicio
+								Registrar Proveedor
 								</button>
 							</div>
 						</form>

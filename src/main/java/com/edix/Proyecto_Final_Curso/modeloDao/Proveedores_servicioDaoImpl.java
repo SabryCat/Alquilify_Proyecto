@@ -3,6 +3,7 @@ package com.edix.Proyecto_Final_Curso.modeloDao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import com.edix.Proyecto_Final_Curso.entities.ProveedoresServicio;
@@ -19,6 +20,18 @@ public class Proveedores_servicioDaoImpl implements Proveedores_servicioDao{
 	@Override
 	public ProveedoresServicio buscarProveedorServicio(int idProveedor) {
 		return esrepo.findById(idProveedor).orElse(null);
+	}
+
+	@Override
+	public ProveedoresServicio altaProveedor(ProveedoresServicio proveedor) {
+		if(buscarProveedorServicio(proveedor.getIdProveedor())==null) {
+			try {
+				return esrepo.save(proveedor);
+			}catch(DataIntegrityViolationException e) {
+				return null;
+			}
+		}
+		return null;
 	}
 
 }
