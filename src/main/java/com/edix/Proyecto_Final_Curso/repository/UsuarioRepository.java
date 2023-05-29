@@ -14,6 +14,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	@Query("select u from Usuario u where u.id_alta =?1 and u.tiposUsuario = 3")
 	public List<Usuario> buscarInquilinos(int idUsuario);
 	
+	@Query("select u from Usuario u, Alquilere a, Inmueble i where u.tiposUsuario = 3 "
+			+ " and u.idUsuario = a.usuario"
+			+ " and a.inmueble = i.idInmueble"
+			+ " and i.usuario =?1")
+	public List<Usuario> buscarInquilinosPorPropietario(Usuario usuario);
+	
 	@Query("select u from Usuario u where u.email=?1")
 	public Usuario buscarPorEmail(String email);
 		

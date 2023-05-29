@@ -60,4 +60,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		return null;
 	}
 
+	@Override
+	public List<Usuario> buscarInquilinosPorPropietario(Usuario usuario) {
+		return urepo.buscarInquilinosPorPropietario(usuario);
+	}
+
+
+
 }

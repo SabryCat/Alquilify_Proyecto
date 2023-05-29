@@ -11,5 +11,6 @@ public interface UsuarioDao {
 	Usuario editarUsuario(Usuario usuario);
 	List<Usuario> buscarTodosPropietarios(int idUsuario);
 	List<Usuario> buscarTodosInquilinos(int idUsuario);
+	List<Usuario> buscarInquilinosPorPropietario(Usuario usuario);
 	void eliminarUsuario(int idUsuario);
 }

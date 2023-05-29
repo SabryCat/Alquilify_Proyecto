@@ -39,13 +39,23 @@ public class UsuariosController {
 	private AlquileresDao adao;
 	
 	@GetMapping("/modulo")
-	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
-		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
-		model.addAttribute("tipousuario",tipousuario);
-		List<Usuario> propietarios = udao.buscarTodosPropietarios(idAdmin);
-		model.addAttribute("propietarios",propietarios);
-		List<Usuario> inquilinos = udao.buscarTodosInquilinos(idAdmin);
-		model.addAttribute("inquilinos",inquilinos);
+	public String home(@SessionAttribute("idUsuarioSession") int idUsuario, 
+						@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession, Model model) {
+		
+		if(tipoUsuarioSession.equals("Administrador")) {
+			List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
+			model.addAttribute("tipousuario",tipousuario);
+			List<Usuario> propietarios = udao.buscarTodosPropietarios(idUsuario);
+			model.addAttribute("propietarios",propietarios);
+			List<Usuario> inquilinos = udao.buscarTodosInquilinos(idUsuario);
+			model.addAttribute("inquilinos",inquilinos);
+		}
+		if(tipoUsuarioSession.equals("Propietario")) {
+			Usuario usuario = udao.buscarUsuario(idUsuario);
+			List<Usuario> inquilinos = udao.buscarInquilinosPorPropietario(usuario);
+			model.addAttribute("inquilinos",inquilinos);
+		}
+
 		return "app/usuarios";		 		
 	}
 		
@@ -89,8 +99,7 @@ public class UsuariosController {
 								@RequestParam String clave,
 								Model model, RedirectAttributes redirect) {		
 		String encriptado = passwordEncoder.encode(clave); 
-		int tipUsuario = Integer.parseInt(tipoDeUsuario);
-		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(tipUsuario);
+		TiposUsuario rolUsuario = tudao.buscarTipoUsuario(Integer.parseInt(tipoDeUsuario));
 		Usuario usuario = new Usuario(0, apellidos, encriptado, domicilio, email, nif, nombre, 1, telefono, 0, rolUsuario);
 		if(udao.altaUsuario(usuario)==null) {
 			redirect.addFlashAttribute("info", "El usuario ya existe en nuestra plataforma");

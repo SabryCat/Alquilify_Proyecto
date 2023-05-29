@@ -133,8 +133,10 @@ public class WebController {
 	@GetMapping("app/panelControl")
 	public String panelControl(Authentication aut, Model model, HttpSession misession) {
 		Usuario usuario = udao.buscarByEmail(aut.getName());
+		String tipoUsuarioSession = usuario.getTiposUsuario().getTipo();
 		misession.setAttribute("idUsuarioSession", usuario.getIdUsuario());
 		misession.setAttribute("nombreUsuarioSession", usuario.getNombre());
+		misession.setAttribute("tipoUsuarioSession",tipoUsuarioSession );
 		return "app/panelControl";		 		
 	}
 }

@@ -40,7 +40,7 @@
 				</ul>
 				
 				<div class="tab-content">
-				
+				${usuario}
 				  <!-- Listado Propietarios -->
 				  <sec:authorize access="hasAuthority('Administrador')">
 				  <div class="p-3 tab-pane fade show active etab-p1">

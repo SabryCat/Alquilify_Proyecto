@@ -33,6 +33,7 @@ public class ServiciosController {
 	
 	@GetMapping("/modulo")
 	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
+		
 		Usuario administrador = udao.buscarUsuario(idAdmin);
 		List<AlquilerServicio> servicios = asdao.buscarTodosPorAdministrador(administrador);
 		model.addAttribute("servicios", servicios);
