@@ -12,5 +12,6 @@ public interface InmuebleDao {
 	Inmueble editarInmueble(Inmueble inmuebles);
 	List<Inmueble> buscarTodosPorAdmin(Usuario administrador);
 	List<Inmueble> buscarTodosPropietario(Usuario propietario);
+	List<Inmueble> buscarTodosInquilino(Usuario inquilino);
 	void eliminarInmueble(int idInmueble);
 }

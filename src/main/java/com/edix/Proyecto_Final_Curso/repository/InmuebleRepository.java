@@ -15,5 +15,9 @@ public interface InmuebleRepository extends JpaRepository<Inmueble, Integer>{
 	
 	@Query("select i from Inmueble i where i.usuario = ?1 ")
 	public List<Inmueble> buscarInmueblesPropietario(Usuario propietario);
+
+	@Query("select i from Inmueble i , Alquilere a where i.idInmueble = a.inmueble"
+			+ " and a.usuario = ?1 ")
+	public List<Inmueble> buscarInmueblesInquilino(Usuario inquilino);
 	
 }

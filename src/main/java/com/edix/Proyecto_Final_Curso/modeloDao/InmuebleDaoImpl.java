@@ -58,4 +58,9 @@ public class InmuebleDaoImpl implements InmuebleDao {
 		return irepo.buscarInmueblesPropietario(propietario);
 	}
 
+	@Override
+	public List<Inmueble> buscarTodosInquilino(Usuario inquilino) {
+		return irepo.buscarInmueblesInquilino(inquilino);
+	}
+
 }

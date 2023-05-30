@@ -16,7 +16,14 @@ public interface AlquileresServiciosRepository extends JpaRepository<AlquilerSer
 	
 	@Query("select a from AlquilerServicio a, Alquilere al, Inmueble i "
 			+ " where a.alquilere = al.idAlquiler"
-			+ " AND al.inmueble = i.idInmueble"
-			+ " AND i.usuarioAdmin =?1 ")	
+			+ " and al.inmueble = i.idInmueble"
+			+ " and i.usuarioAdmin =?1 ")	
 	public List<AlquilerServicio> buscarTodosPorAdministrador(Usuario administrador);
+	
+	@Query("select a from AlquilerServicio a, Alquilere al, Inmueble i "
+			+ " where a.alquilere = al.idAlquiler"
+			+ " and al.inmueble = i.idInmueble"
+			+ " and al.usuario =?1 ")	
+	public List<AlquilerServicio> buscarTodosPorInquilino(Usuario inquilino);
+	
 }

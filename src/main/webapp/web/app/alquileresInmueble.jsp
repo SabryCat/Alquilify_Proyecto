@@ -75,7 +75,7 @@
 													Editar
 												</sec:authorize>
 												
-												<sec:authorize access="hasAuthority('Propietario')">
+												<sec:authorize access="hasAuthority('Propietario') or hasAuthority('Inquilino')">
 													ver
 												</sec:authorize>
 												

@@ -7,7 +7,10 @@
     <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <span class="fs-4">Panel Alquilify </span>
     </a>
-    <sec:authentication property="name"/>
+     	<p class="mt-3">
+        <sec:authentication property="name"/><br>
+       ${sessionScope.tipoUsuarioSession}
+       </p>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -58,8 +61,8 @@
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <!--<li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>-->
+        <li><a class="dropdown-item" href="#">Settings</a></li>-->
+        <li><a class="dropdown-item" href="#">Perfil usuario</a></li>
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="/logout">Cerrar Sesión</a></li>
       </ul>

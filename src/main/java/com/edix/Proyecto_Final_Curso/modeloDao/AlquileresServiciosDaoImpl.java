@@ -43,6 +43,11 @@ public class AlquileresServiciosDaoImpl implements AlquileresServiciosDao{
 	}
 
 	@Override
+	public List<AlquilerServicio> buscarTodosPorInquilino(Usuario inquilino) {
+		return asrepo.buscarTodosPorInquilino(inquilino);
+	}
+	
+	@Override
 	public AlquilerServicio buscarServicio(int idServicio) {
 		return asrepo.findById(idServicio).orElse(null);
 	}
@@ -54,6 +59,7 @@ public class AlquileresServiciosDaoImpl implements AlquileresServiciosDao{
 		}
 		return null;
 	}
+
 
 	
 }

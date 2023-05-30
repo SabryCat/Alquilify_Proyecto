@@ -14,5 +14,5 @@ public interface AlquileresServiciosDao {
 	AlquilerServicio altaAlquilerServicio(AlquilerServicio alquilerservicio);
 	List<AlquilerServicio> buscarTodosPorAlquiler(Alquilere alquiler);
 	List<AlquilerServicio> buscarTodosPorAdministrador(Usuario administrador);
-	
+	List<AlquilerServicio> buscarTodosPorInquilino(Usuario inquilino);
 }

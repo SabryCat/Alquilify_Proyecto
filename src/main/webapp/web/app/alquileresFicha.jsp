@@ -33,18 +33,19 @@
 									</c:forEach>								
 								</select>
 							</div>
-							<div class="form-floating mb-2">
-								<p class="mb-0" style="margin-left: 10px;">Inquilino</p>
-								<select name="usuarioInquilino" class="form-select" required>
-									<c:forEach var="ele" items="${inquilinos}">
-										<c:if test="${ele.idUsuario eq contrato.usuario.idUsuario}">
-											<option value="${ele.idUsuario}" selected>${ele.nombre}, ${ele.apellidos} - DNI: ${ele.nif }</option>
-										</c:if>	
-											<option value="${ele.idUsuario}">${ele.nombre}, ${ele.apellidos} - DNI: ${ele.nif }</option>
-									</c:forEach>								
-								</select>
-							</div>
-							
+							<sec:authorize access="hasAuthority('Administrador') or hasAuthority('Propietario')">
+								<div class="form-floating mb-2">
+									<p class="mb-0" style="margin-left: 10px;">Inquilino</p>
+									<select name="usuarioInquilino" class="form-select" required>
+										<c:forEach var="ele" items="${inquilinos}">
+											<c:if test="${ele.idUsuario eq contrato.usuario.idUsuario}">
+												<option value="${ele.idUsuario}" selected>${ele.nombre}, ${ele.apellidos} - DNI: ${ele.nif }</option>
+											</c:if>	
+												<option value="${ele.idUsuario}">${ele.nombre}, ${ele.apellidos} - DNI: ${ele.nif }</option>
+										</c:forEach>								
+									</select>
+								</div>
+							</sec:authorize>
 							<div class="form-floating mb-2">
 							  <input value="${contrato.importe}" type="number" step="0.00" name="importe" class="form-control form-control-lg" required/>
 							  <label class="form-label" for="importe">Importe</label>

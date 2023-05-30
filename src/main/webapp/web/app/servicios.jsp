@@ -58,15 +58,12 @@
 									<td scope="row">${ele.fechaContratacion}</td>
 									<td scope="row">${ele.fechaFinalizacion}</td>
 									<td scope="row">${ele.baja}</td>
-									<!--<td>
-										<div class="btn-group btn-group-sm" role="group" aria-label="propiedades" style="margin-left: 20%;">
-											<a href="/alquileres/verServicios/${ele.idAlquilerServicio}"  type="button" class="btn btn-outline-primary">ver</a>
-										</div>
-									</td>-->
 									<td>
-										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/servicios/verficha/${ele.idAlquilerServicio}"  type="button" class="btn btn-outline-primary">Editar</a>																		<!-- btn-outline-warning -->
-										</div>
+										<sec:authorize access="hasAuthority('Administrador')">
+											<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+												<a href="/servicios/verficha/${ele.idAlquilerServicio}"  type="button" class="btn btn-outline-primary">Editar</a>																		<!-- btn-outline-warning -->
+											</div>
+										</sec:authorize>
 									</td>
 								</tr>	 
 							</c:forEach>

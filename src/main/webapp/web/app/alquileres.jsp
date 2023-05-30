@@ -73,7 +73,7 @@
 													<sec:authorize access="hasAuthority('Administrador')">
 														Editar
 													</sec:authorize>
-													<sec:authorize access="hasAuthority('Propietario')">
+													<sec:authorize access="hasAuthority('Propietario') or hasAuthority('Inquilino')">
 														Ver
 													</sec:authorize>
 												</a>

@@ -46,49 +46,7 @@
 									</c:forEach>
 								</select>
 							</div>
-		
-		
-		
-							<!--<div class="form-floating mb-4">
-								<select name="tipoUser" class="form-select">
-									<option>Seleccionar Tipo de contrato de alquiler</option>
-									<c:forEach var="ele" items="${tiposcontratos}">
-										<option value="${ele.idTipoContrato}"> ${ele.tipo}</option>
-									</c:forEach>
-								</select>
-							</div>
-		
-							<div class="form-floating mb-4">
-								<select name="tipoUser" class="form-select">
-									<option>Seleccionar Provincia</option>
-									<c:forEach var="ele" items="${provincias}">
-										<option value="${ele.idProvincia}"> ${ele.nombre}</option>
-									</c:forEach>
-								</select>
-							</div>	
-		
-							<div class="form-floating mb-4">
-								<select name="tipoUser" class="form-select">
-									<option>Seleccionar tipo de Servicio</option>
-									<c:forEach var="ele" items="${tiposservicios}">
-										<option value="${ele.idTipoServicio}"> ${ele.tipo}</option>
-									</c:forEach>
-								</select>
-							</div>		
-		
-							<div class="form-floating mb-4">
-								<select name="tipoUser" class="form-select">
-									<option>Seleccionar proveedor</option>
-									<c:forEach var="ele" items="${proveedores}">
-										<option value="${ele.idProveedor}"> ${ele.nombre}</option>
-									</c:forEach>
-								</select>
-							</div>-->	
-		
-		
-		
-		
-		
+				
 							<div class="form-floating mb-4">
 							  <input type="text" name="nombre" class="form-control form-control-lg" required/>
 							  <label class="form-label" for="nombre">Nombre</label>

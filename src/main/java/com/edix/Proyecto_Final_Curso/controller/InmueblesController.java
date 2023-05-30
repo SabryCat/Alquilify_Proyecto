@@ -37,20 +37,29 @@ public class InmueblesController {
 	@GetMapping("/modulo")
 	public String home(@SessionAttribute("idUsuarioSession") int idUsuario, 
 						@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession, Model model) {
+		
 		if(tipoUsuarioSession.equals("Administrador")) {
-		Usuario administrador = udao.buscarUsuario(idUsuario);
-		List<Inmueble> inmuebles = idao.buscarTodosPorAdmin(administrador);
-		model.addAttribute("inmuebles",inmuebles);
-		List<Usuario> propietarios = udao.buscarTodosPropietarios(idUsuario);
-		model.addAttribute("propietarios",propietarios);
-		List<Provincia> provincias = pdao.buscarTodas();
-		model.addAttribute("provincias", provincias);
+			Usuario administrador = udao.buscarUsuario(idUsuario);
+			List<Inmueble> inmuebles = idao.buscarTodosPorAdmin(administrador);
+			model.addAttribute("inmuebles",inmuebles);
+			List<Usuario> propietarios = udao.buscarTodosPropietarios(idUsuario);
+			model.addAttribute("propietarios",propietarios);
+			List<Provincia> provincias = pdao.buscarTodas();
+			model.addAttribute("provincias", provincias);
 		}
+		
 		if(tipoUsuarioSession.equals("Propietario")) {
 			Usuario propietario = udao.buscarUsuario(idUsuario);
 			List<Inmueble> inmuebles = idao.buscarTodosPropietario(propietario);
 			model.addAttribute("inmuebles",inmuebles);
 		}
+		
+		if(tipoUsuarioSession.equals("Inquilino")) {
+			Usuario inquilino = udao.buscarUsuario(idUsuario);
+			List<Inmueble> inmuebles = idao.buscarTodosInquilino(inquilino);
+			model.addAttribute("inmuebles",inmuebles);
+		}
+		
 		return "app/inmuebles";
 	}
 	

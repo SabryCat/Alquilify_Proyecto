@@ -60,11 +60,18 @@ public class AlquileresController {
 			List<Alquilere> contratos = adao.buscarTodosPorAdmin(administrador);
 			model.addAttribute("contratos",contratos);
 		}
+		
 		if(tipoUsuarioSession.equals("Propietario")) {
 			Usuario propietario = udao.buscarUsuario(idUsuario);
 			List<Usuario> inquilinos = udao.buscarInquilinosPorPropietario(propietario);
 			model.addAttribute("inquilinos",inquilinos);
 			List<Alquilere> contratos = adao.buscarTodosPorPropietario(propietario);
+			model.addAttribute("contratos",contratos);
+		}
+		
+		if(tipoUsuarioSession.equals("Inquilino")) {
+			Usuario inquilino = udao.buscarUsuario(idUsuario);
+			List<Alquilere> contratos = adao.buscarTodosPorInquilino(inquilino);
 			model.addAttribute("contratos",contratos);
 		}
 		return "app/alquileres";
@@ -110,7 +117,7 @@ public class AlquileresController {
 	
 	@GetMapping("/verContrato/{id}")
 	public String verFichaAlquiler(@PathVariable("id") int idContrato, 
-									@SessionAttribute("idUsuarioSession") int idAdmin,
+									@SessionAttribute("idUsuarioSession") int idUsuario,
 									@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession,
 									Model model, RedirectAttributes redirect) {
 		Alquilere contrato = adao.buscarAlquiler(idContrato);
@@ -120,8 +127,16 @@ public class AlquileresController {
 			return "redirect:/alquileres/modulo";			
 		}
 		model.addAttribute("contrato", contrato);
-		List<Usuario> inquilinos = udao.buscarTodosInquilinos(idAdmin);
-		model.addAttribute("inquilinos",inquilinos);
+		
+		if(tipoUsuarioSession.equals("Administrador")) {
+			List<Usuario> inquilinos = udao.buscarTodosInquilinos(idUsuario);
+			model.addAttribute("inquilinos",inquilinos);
+		}
+		if(tipoUsuarioSession.equals("Propietario")) {
+			Usuario propietario = udao.buscarUsuario(idUsuario);
+			List<Usuario> inquilinos = udao.buscarInquilinosPorPropietario(propietario);
+			model.addAttribute("inquilinos",inquilinos);
+		}
 		List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
 		model.addAttribute("tiposcontratos",tiposcontratos);
 		return "app/alquileresFicha";

@@ -32,13 +32,23 @@ public class ServiciosController {
 	private Tipo_servicioDao tsdao;
 	
 	@GetMapping("/modulo")
-	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
+	public String home(@SessionAttribute("idUsuarioSession") int idUsuario, 
+						@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession, Model model) {
 		
-		Usuario administrador = udao.buscarUsuario(idAdmin);
-		List<AlquilerServicio> servicios = asdao.buscarTodosPorAdministrador(administrador);
-		model.addAttribute("servicios", servicios);
-		List<TiposServicio> tiposservicios = tsdao.buscarTodos();
-		model.addAttribute("tiposservicios", tiposservicios);
+		if(tipoUsuarioSession.equals("Administrador")) {
+			Usuario administrador = udao.buscarUsuario(idUsuario);
+			List<AlquilerServicio> servicios = asdao.buscarTodosPorAdministrador(administrador);
+			model.addAttribute("servicios", servicios);
+			List<TiposServicio> tiposservicios = tsdao.buscarTodos();
+			model.addAttribute("tiposservicios", tiposservicios);
+		}
+		
+		if(tipoUsuarioSession.equals("Inquilino")) {
+			Usuario administrador = udao.buscarUsuario(idUsuario);
+			List<AlquilerServicio> servicios = asdao.buscarTodosPorInquilino(administrador);
+			model.addAttribute("servicios", servicios);
+		}
+		
 		return "app/servicios";
 						
 	}

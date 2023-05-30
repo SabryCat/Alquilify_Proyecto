@@ -26,7 +26,7 @@
 	  	
 				<!-- tabs -->
 				<ul id="myTab" class="nav nav-tabs" role="tablist">
-				  	<li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">PROPIEDADES</a></li>
+				  	<li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">PROPIEDADES <sec:authorize access="hasAuthority('Inquilino')">ALQUILADAS</sec:authorize></a></li>
 				  
 				  <sec:authorize access="hasAuthority('Administrador')">
 				  	<li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">ALTAS</a></li>		  
