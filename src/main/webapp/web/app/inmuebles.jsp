@@ -66,10 +66,12 @@
 										</div>
 									</td>
 									<td>
-										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/inmuebles/verficha/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">Editar</a>
-											<a href="/inmuebles/eliminar/${ele.idInmueble}"  type="button" class="btn btn-outline-warning">Eliminar</a>
-										</div>
+										<sec:authorize access="hasAuthority('Administrador')">
+											<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
+												<a href="/inmuebles/verficha/${ele.idInmueble}"  type="button" class="btn btn-outline-primary">Editar</a>
+												<a href="/inmuebles/eliminar/${ele.idInmueble}"  type="button" class="btn btn-outline-warning">Eliminar</a>
+											</div>
+										</sec:authorize>
 									</td>
 								</tr>	 
 							</c:forEach>

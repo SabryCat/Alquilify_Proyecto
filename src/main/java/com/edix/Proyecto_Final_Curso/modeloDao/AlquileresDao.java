@@ -14,6 +14,6 @@ public interface AlquileresDao {
 	List<Alquilere> buscarTodosPorAdmin(Usuario administrador);
 	List<Alquilere> buscarAlquilerPorInmueble(Inmueble inmueble);
 	List<Alquilere> buscarTodosPorInquilino(Usuario inquilino);
-	
+	List<Alquilere> buscarTodosPorPropietario(Usuario propietario);
 	
 }

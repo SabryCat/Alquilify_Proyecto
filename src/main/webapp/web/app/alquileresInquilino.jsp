@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,15 @@
 									<td> ${ele.usuario.nombre}, ${ele.usuario.apellidos}</td>
 									<td>
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/alquileres/verContrato/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">Editar</a>									
+											<a href="/alquileres/verContrato/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">
+												<sec:authorize access="hasAuthority('Administrador')">
+													Editar
+												</sec:authorize>
+												
+												<sec:authorize access="hasAuthority('Propietario')">
+													Ver
+												</sec:authorize>
+											</a>									
 										</div>
 									</td>
 								</tr>	 

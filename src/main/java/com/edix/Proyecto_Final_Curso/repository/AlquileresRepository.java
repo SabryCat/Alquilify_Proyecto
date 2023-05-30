@@ -17,5 +17,8 @@ public interface AlquileresRepository extends JpaRepository<Alquilere, Integer>{
 	public List<Alquilere> buscarAlquilerPorInmueble(Inmueble inmueble);
 	
 	@Query("select a from Alquilere a, Inmueble i where a.inmueble = i.idInmueble AND a.usuario = ?1 ")
-	public List<Alquilere> buscarAlquilerInquilino(Usuario inquilino);	
+	public List<Alquilere> buscarAlquilerInquilino(Usuario inquilino);
+	
+	@Query("select a from Alquilere a, Inmueble i where a.inmueble = i.idInmueble AND i.usuario = ?1 ")
+	public List<Alquilere> buscarTodosPorPropietario(Usuario propietario);	
 }

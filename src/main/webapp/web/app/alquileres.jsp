@@ -48,6 +48,7 @@
 						      <th scope="col">Propietario</th>
 						      <th scope="col">Inquilino</th>
 						      <th scope="col">Servicios</th>
+						      <th scope="col">Alquiler</th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -66,9 +67,19 @@
 										</div>
 									</td>
 									<td>
-										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
-											<a href="/alquileres/verContrato/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">Editar</a>
-										</div>
+										
+											<div class="btn-group btn-group-sm" role="group" aria-label="acciones" style="margin-left: 20%;">											
+												<a href="/alquileres/verContrato/${ele.idAlquiler}"  type="button" class="btn btn-outline-primary">
+													<sec:authorize access="hasAuthority('Administrador')">
+														Editar
+													</sec:authorize>
+													<sec:authorize access="hasAuthority('Propietario')">
+														Ver
+													</sec:authorize>
+												</a>
+											
+											</div>
+										
 									</td>
 								</tr>	 
 							</c:forEach>

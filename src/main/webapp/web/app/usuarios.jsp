@@ -116,10 +116,12 @@
 										</div>
 									</td>
 									<td>
+										<sec:authorize access="hasAuthority('Administrador')">
 										<div class="btn-group btn-group-sm" role="group" aria-label="acciones">
 											<a href="/usuarios/verficha/${ele.idUsuario}"  type="button" class="btn btn-outline-primary">Editar</a>
 											<a href="/usuarios/eliminar/${ele.idUsuario}"  type="button" class="btn btn-outline-warning">Eliminar</a>
 										</div>
+										</sec:authorize>
 									</td>
 								</tr>	 
 							</c:forEach>

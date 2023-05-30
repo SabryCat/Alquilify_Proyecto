@@ -45,17 +45,28 @@ public class AlquileresController {
 	private AlquileresServiciosDao asdao;
 	
 	@GetMapping("/modulo")
-	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
-		Usuario administrador = udao.buscarUsuario(idAdmin);
-		List<Inmueble> inmuebles = idao.buscarTodosPorAdmin(administrador);
-		System.out.println(inmuebles);
-		model.addAttribute("inmuebles",inmuebles);
-		List<Usuario> inquilinos = udao.buscarTodosInquilinos(idAdmin);
-		model.addAttribute("inquilinos",inquilinos);
-		List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
-		model.addAttribute("tiposcontratos",tiposcontratos);
-		List<Alquilere> contratos = adao.buscarTodosPorAdmin(administrador);
-		model.addAttribute("contratos",contratos);
+	public String home(@SessionAttribute("idUsuarioSession") int idUsuario, 
+						@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession, Model model) {
+		
+		if(tipoUsuarioSession.equals("Administrador")) {
+			Usuario administrador = udao.buscarUsuario(idUsuario);
+			List<Inmueble> inmuebles = idao.buscarTodosPorAdmin(administrador);
+			System.out.println(inmuebles);
+			model.addAttribute("inmuebles",inmuebles);
+			List<Usuario> inquilinos = udao.buscarTodosInquilinos(idUsuario);
+			model.addAttribute("inquilinos",inquilinos);
+			List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
+			model.addAttribute("tiposcontratos",tiposcontratos);
+			List<Alquilere> contratos = adao.buscarTodosPorAdmin(administrador);
+			model.addAttribute("contratos",contratos);
+		}
+		if(tipoUsuarioSession.equals("Propietario")) {
+			Usuario propietario = udao.buscarUsuario(idUsuario);
+			List<Usuario> inquilinos = udao.buscarInquilinosPorPropietario(propietario);
+			model.addAttribute("inquilinos",inquilinos);
+			List<Alquilere> contratos = adao.buscarTodosPorPropietario(propietario);
+			model.addAttribute("contratos",contratos);
+		}
 		return "app/alquileres";
 	}
 	
@@ -100,6 +111,7 @@ public class AlquileresController {
 	@GetMapping("/verContrato/{id}")
 	public String verFichaAlquiler(@PathVariable("id") int idContrato, 
 									@SessionAttribute("idUsuarioSession") int idAdmin,
+									@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession,
 									Model model, RedirectAttributes redirect) {
 		Alquilere contrato = adao.buscarAlquiler(idContrato);
 		if(contrato == null) {

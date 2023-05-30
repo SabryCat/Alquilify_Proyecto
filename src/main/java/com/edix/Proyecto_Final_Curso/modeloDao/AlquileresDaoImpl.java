@@ -55,5 +55,10 @@ public class AlquileresDaoImpl implements AlquileresDao {
 	public List<Alquilere> buscarTodosPorInquilino(Usuario inquilino) {
 		return arepo.buscarAlquilerInquilino(inquilino);
 	}
+
+	@Override
+	public List<Alquilere> buscarTodosPorPropietario(Usuario propietario) {
+		return arepo.buscarTodosPorPropietario(propietario);
+	}
 	
 }

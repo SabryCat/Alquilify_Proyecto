@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 			<div class="row d-flex justify-content-center align-items-start">
 			  <div class="col-sm-12 mx-auto">
 				  <!-- Formulario Modificar -->
-						<h5 class="card-title text-center mb-2">Modificar datos del contrato #${contrato.idAlquiler}</h5>
+						<h5 class="card-title text-center mb-2"><sec:authorize access="hasAuthority('Administrador')">Modificar</sec:authorize> Datos del contrato #${contrato.idAlquiler}</h5>
 						<form action="/alquileres/editarContrato/${contrato.idAlquiler}" method="post" class="col-sm-8 mx-auto">							
 							<div class="form-floating mb-2">
 							<p class="mb-0" style="margin-left: 10px;">Contrato</p>
@@ -82,12 +83,13 @@
 							  <input value="${contrato.observaciones}"type="text" name="observaciones" class="form-control form-control-lg" required/>
 							  <label class="form-label" for="observaciones">Observaciones</label>
 							</div>
-							
-							<div class="d-grid">
-								<button class="p-3 btn text-white btn-primary text-uppercase fw-bold" type="submit">
-								Guardar cambios
-								</button>
-							</div>
+							<sec:authorize access="hasAuthority('Administrador')">
+								<div class="d-grid">
+									<button class="p-3 btn text-white btn-primary text-uppercase fw-bold" type="submit">
+									Guardar cambios
+									</button>
+								</div>
+							</sec:authorize>
 						</form>		  
 				</div>
 				<!-- fin tabs -->

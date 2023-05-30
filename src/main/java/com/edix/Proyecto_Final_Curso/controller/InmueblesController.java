@@ -35,14 +35,22 @@ public class InmueblesController {
 	private AlquileresDao adao;
 	
 	@GetMapping("/modulo")
-	public String home(@SessionAttribute("idUsuarioSession") int idAdmin, Model model) {
-		Usuario administrador = udao.buscarUsuario(idAdmin);
+	public String home(@SessionAttribute("idUsuarioSession") int idUsuario, 
+						@SessionAttribute("tipoUsuarioSession") String tipoUsuarioSession, Model model) {
+		if(tipoUsuarioSession.equals("Administrador")) {
+		Usuario administrador = udao.buscarUsuario(idUsuario);
 		List<Inmueble> inmuebles = idao.buscarTodosPorAdmin(administrador);
 		model.addAttribute("inmuebles",inmuebles);
-		List<Usuario> propietarios = udao.buscarTodosPropietarios(idAdmin);
+		List<Usuario> propietarios = udao.buscarTodosPropietarios(idUsuario);
 		model.addAttribute("propietarios",propietarios);
 		List<Provincia> provincias = pdao.buscarTodas();
 		model.addAttribute("provincias", provincias);
+		}
+		if(tipoUsuarioSession.equals("Propietario")) {
+			Usuario propietario = udao.buscarUsuario(idUsuario);
+			List<Inmueble> inmuebles = idao.buscarTodosPropietario(propietario);
+			model.addAttribute("inmuebles",inmuebles);
+		}
 		return "app/inmuebles";
 	}
 	
