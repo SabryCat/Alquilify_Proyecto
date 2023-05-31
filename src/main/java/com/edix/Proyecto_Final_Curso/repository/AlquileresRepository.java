@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.edix.Proyecto_Final_Curso.entities.Alquilere;
 import com.edix.Proyecto_Final_Curso.entities.Inmueble;
 import com.edix.Proyecto_Final_Curso.entities.Usuario;
+import com.edix.Proyecto_Final_Curso.modeloDao.VencimientoProjection;
+
 
 public interface AlquileresRepository extends JpaRepository<Alquilere, Integer>{
 	@Query("select a from Alquilere a, Inmueble i where a.inmueble = i.idInmueble AND i.usuarioAdmin = ?1 ")
@@ -21,4 +23,10 @@ public interface AlquileresRepository extends JpaRepository<Alquilere, Integer>{
 	
 	@Query("select a from Alquilere a, Inmueble i where a.inmueble = i.idInmueble AND i.usuario = ?1 ")
 	public List<Alquilere> buscarTodosPorPropietario(Usuario propietario);	
+		
+	@Query("select new com.edix.Proyecto_Final_Curso.modeloDao.VencimientoProjection(a, DATEDIFF(a.fechaFin, CURDATE())) from Alquilere a, Inmueble i "
+			+ " where a.inmueble = i.idInmueble "
+			+ " and i.usuarioAdmin = ?1")
+	public List<VencimientoProjection> buscarVencimientoAdmin(Usuario administrador);
+	
 }

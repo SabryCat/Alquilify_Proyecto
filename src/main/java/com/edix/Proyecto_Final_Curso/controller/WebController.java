@@ -10,14 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.edix.Proyecto_Final_Curso.entities.TiposUsuario;
 import com.edix.Proyecto_Final_Curso.entities.Usuario;
-import com.edix.Proyecto_Final_Curso.modeloDao.Proveedores_servicioDao;
-import com.edix.Proyecto_Final_Curso.modeloDao.ProvinciasDao;
-import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_contratoDao;
-import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_servicioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.Tipo_usuarioDao;
 import com.edix.Proyecto_Final_Curso.modeloDao.UsuarioDao;
+import com.edix.Proyecto_Final_Curso.modeloDao.VencimientoProjection;
+import com.edix.Proyecto_Final_Curso.modeloDao.VencimientoServiciosProjection;
+import com.edix.Proyecto_Final_Curso.modeloDao.WebPanelDao;
 
 /**
  * 
@@ -36,14 +36,8 @@ public class WebController {
 	@Autowired
 	private UsuarioDao udao;
 	@Autowired
-	private Tipo_contratoDao tcdao;
-	@Autowired
-	private ProvinciasDao pdao;
-	@Autowired
-	private Tipo_servicioDao tsdao;
-	@Autowired
-	private Proveedores_servicioDao esdao;
-	
+	private WebPanelDao wpcdao;
+
 	/**
 	 * ruta a la página de contacto
 	 * 
@@ -83,18 +77,6 @@ public class WebController {
 		List<TiposUsuario> tipousuario = tudao.buscarTodos(); 
 		//System.out.println(tipousuario);
 		model.addAttribute("tipousuario",tipousuario);
-		
-		/*List<TipoContrato> tiposcontratos = tcdao.buscarTodos();
-		model.addAttribute("tiposcontratos",tiposcontratos);
-
-		List<Provincia> provincias = pdao.buscarTodas();
-		model.addAttribute("provincias", provincias);
-		
-		List<TiposServicio> tiposservicios = tsdao.buscarTodos();
-		model.addAttribute("tiposservicios", tiposservicios);
-		
-		List<ProveedoresServicio> proveedores = esdao.buscarTodos();
-		model.addAttribute("proveedores", proveedores);*/
 		return "cuenta";
 	
 	}
@@ -126,9 +108,30 @@ public class WebController {
 	public String panelControl(Authentication aut, Model model, HttpSession misession) {
 		Usuario usuario = udao.buscarByEmail(aut.getName());
 		String tipoUsuarioSession = usuario.getTiposUsuario().getTipo();
-		misession.setAttribute("idUsuarioSession", usuario.getIdUsuario());
+		int idUsuario = usuario.getIdUsuario();
+		misession.setAttribute("idUsuarioSession", idUsuario );
 		misession.setAttribute("nombreUsuarioSession", usuario.getNombre());
 		misession.setAttribute("tipoUsuarioSession",tipoUsuarioSession );
+		
+		
+		
+		Usuario usuarioActual = udao.buscarUsuario(idUsuario);
+		
+		if(tipoUsuarioSession.equals("Administrador")) {
+			List<VencimientoProjection> contratos = wpcdao.buscarFechasVencimiento(usuarioActual);		
+			model.addAttribute("contratos",contratos);
+			List<VencimientoServiciosProjection> servicios = wpcdao.buscarFechasVencimientoServicios(usuarioActual);		
+			model.addAttribute("servicios",servicios);
+		}
+		
+		if(tipoUsuarioSession.equals("Propietario")) {
+			
+		}
+
+		if(tipoUsuarioSession.equals("Inquilino")) {
+			
+		}		
+		
 		return "app/panelControl";		 		
 	}
 }

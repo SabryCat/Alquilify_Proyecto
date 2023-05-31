@@ -204,7 +204,7 @@ public class AlquileresController {
 										) {
 		Alquilere contrato = adao.buscarAlquiler(idAlquiler);
 		ProveedoresServicio proveedor = esdao.buscarProveedorServicio(Integer.parseInt(proveedoresServicio));
-	//int proveedoresServicio	
+
 		Date fechaC = DateUtils.parseStringToDate(fechaContratacion);
 		Date fechaF = DateUtils.parseStringToDate(fechaFinalizacion);
 		
