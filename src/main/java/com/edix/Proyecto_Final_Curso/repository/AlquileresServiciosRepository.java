@@ -12,8 +12,14 @@ import com.edix.Proyecto_Final_Curso.entities.Usuario;
 import com.edix.Proyecto_Final_Curso.modeloDao.VencimientoServiciosProjection;
 
 public interface AlquileresServiciosRepository extends JpaRepository<AlquilerServicio, Integer> {
+	
 	@Query("select a from AlquilerServicio a where a.alquilere = ?1 ")
 	public List<AlquilerServicio> buscarPorAlquiler(Alquilere alquiler);
+	
+	
+	
+	
+	
 	
 	@Query("select a from AlquilerServicio a, Alquilere al, Inmueble i "
 			+ " where a.alquilere = al.idAlquiler"

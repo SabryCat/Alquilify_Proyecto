@@ -32,31 +32,32 @@ public class DataUserConfiguration extends WebSecurityConfigurerAdapter {
 		http
 		.csrf().disable()
 		.authorizeRequests()
-		// Los directorios estáticos no requieren autenticacion
+		/**
+		 * Los directorios estáticos no requieren autenticacion
+		 */
 		.antMatchers("/bootstrap/**", "/images/**", "/css/**", "/js/**").permitAll()
 		.antMatchers("/").permitAll()
 		.antMatchers("/index").permitAll()
+		/**
+		 * el acceso al panel de control requerira un rol de usuario
+		 */
 		.antMatchers("/app/panelControl").hasAnyAuthority("Administrador", "Propietario", "Inquilino")
-		//.anyRequest().authenticated()
 		.and()
 		.formLogin().permitAll()
-        .defaultSuccessUrl("/app/panelControl")//redirección al panel de usuario
+		/**
+		 * login
+		 * redireccion al panel de usuario despues del login
+		 */		
+        .defaultSuccessUrl("/app/panelControl")//
         .and()
         .logout()
         .logoutUrl("/logout")
+		/**
+		 * logout
+		 * redireccion al sitio web
+		 */	
         .logoutSuccessUrl("/?logout")
-        .permitAll()
-        
-        ;
-		// El formulario de Login no requiere autenticacion
-					//.and().formLogin().permitAll().successHandler(loginHandler);
-		/*
-		 * 
-		 * .formLogin().permitAll()
-		.and()
-		 * 
-		 * */
-		/*.antMatchers("/usuarios/altaUsuario").permitAll();*/
+        .permitAll();
 	}
 	
 	@Bean
