@@ -15,6 +15,7 @@ public class WebPanelDaoImpl implements WebPanelDao {
 	AlquileresRepository arepo;	
 	@Autowired	
 	AlquileresServiciosRepository asrepo;
+	
 	@Override
 	public List<VencimientoProjection> buscarFechasVencimiento(Usuario administrador) {
 		return arepo.buscarVencimientoAdmin(administrador);
@@ -24,5 +25,24 @@ public class WebPanelDaoImpl implements WebPanelDao {
 	public List<VencimientoServiciosProjection> buscarFechasVencimientoServicios(Usuario administrador) {
 		return asrepo.buscarVencimientoServiciosAdmin(administrador);
 	}
-
+	
+	
+	@Override
+	public List<VencimientoProjection> buscarVencimientoPropietario(Usuario propietario) {
+		return arepo.buscarVencimientoPropietario(propietario);		
+	}
+	@Override
+	public List<VencimientoServiciosProjection> buscarVencimientoServiciosProp(Usuario propietario) {
+		return asrepo.buscarVencimientoServiciosProp(propietario);
+	}
+	
+	
+	@Override
+	public List<VencimientoProjection> buscarVencimientoInqui(Usuario inquilino) {
+		return arepo.buscarVencimientoInquilino(inquilino);	
+	}
+	@Override
+	public List<VencimientoServiciosProjection> buscarVencimientoServiciosInqui(Usuario propietario) {
+		return asrepo.buscarVencimientoServiciosInqui(propietario);
+	}
 }

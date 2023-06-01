@@ -9,7 +9,7 @@
     </a>
      	<p class="mt-3">
         <sec:authentication property="name"/><br>
-       ${sessionScope.tipoUsuarioSession}
+        <span class="badge bg-warning text-dark">${sessionScope.tipoUsuarioSession}</span>      
        </p>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">

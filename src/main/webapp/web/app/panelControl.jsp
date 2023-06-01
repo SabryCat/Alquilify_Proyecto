@@ -28,10 +28,7 @@
 				<!-- tabs -->
 				<ul id="myTab" class="nav nav-tabs" role="tablist">			
 				  	<li class="nav-item"><a class="nav-link active show" href="#tab-1" data-bs-target=".etab-p1" data-bs-toggle="tab">VENCIMIENTOS CONTRATOS ALQUILER</a></li>
-				  	
-				  	<sec:authorize access="hasAuthority('Administrador')">
-				  		<li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">VENCIMIENTOS SERVICIOS</a></li>		  
-					</sec:authorize>
+				  	<li class="nav-item"><a class="nav-link" href="#tab-2" data-bs-target=".etab-p2" data-bs-toggle="tab">VENCIMIENTOS SERVICIOS</a></li>		  	 	
 				</ul>
 				
 				<div class="tab-content">
@@ -124,7 +121,7 @@
 
 
 				  </div>
-				  
+
 				</div>
 				<!-- fin tabs -->
       		</div>
@@ -135,7 +132,7 @@
   
   
   
-
+	 	<!-- Script para los tabs -->
         <script>
         $('#myTab a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
         	  let target = $(e.target).data('bs-target')

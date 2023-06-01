@@ -125,11 +125,19 @@ public class WebController {
 		}
 		
 		if(tipoUsuarioSession.equals("Propietario")) {
+			List<VencimientoProjection> contratos = wpcdao.buscarVencimientoPropietario(usuarioActual);		
+			model.addAttribute("contratos",contratos);
+			System.out.println(" Batmannn" +contratos);
+			List<VencimientoServiciosProjection> servicios = wpcdao.buscarVencimientoServiciosProp(usuarioActual);		
+			model.addAttribute("servicios",servicios);
 			
 		}
 
 		if(tipoUsuarioSession.equals("Inquilino")) {
-			
+			List<VencimientoProjection> contratos = wpcdao.buscarVencimientoInqui(usuarioActual);		
+			model.addAttribute("contratos",contratos);
+			List<VencimientoServiciosProjection> servicios = wpcdao.buscarVencimientoServiciosInqui(usuarioActual);		
+			model.addAttribute("servicios",servicios);
 		}		
 		
 		return "app/panelControl";		 		

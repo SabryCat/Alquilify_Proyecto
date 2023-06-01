@@ -33,5 +33,15 @@ public interface AlquileresServiciosRepository extends JpaRepository<AlquilerSer
 			+ " and i.usuarioAdmin =?1 ")	
 	public List<VencimientoServiciosProjection> buscarVencimientoServiciosAdmin(Usuario administrador);
 	
+	@Query("select new com.edix.Proyecto_Final_Curso.modeloDao.VencimientoServiciosProjection(a, DATEDIFF(a.fechaFinalizacion, CURDATE())) from AlquilerServicio a, Alquilere al, Inmueble i "
+			+ " where a.alquilere = al.idAlquiler"
+			+ " and al.inmueble = i.idInmueble"
+			+ " and i.usuario =?1 ")	
+	public List<VencimientoServiciosProjection> buscarVencimientoServiciosProp(Usuario propietario);
 	
+	@Query("select new com.edix.Proyecto_Final_Curso.modeloDao.VencimientoServiciosProjection(a, DATEDIFF(a.fechaFinalizacion, CURDATE())) from AlquilerServicio a, Alquilere al, Inmueble i "
+			+ " where a.alquilere = al.idAlquiler"
+			+ " and al.inmueble = i.idInmueble"
+			+ " and al.usuario =?1 ")	
+	public List<VencimientoServiciosProjection> buscarVencimientoServiciosInqui(Usuario propietario);
 }
