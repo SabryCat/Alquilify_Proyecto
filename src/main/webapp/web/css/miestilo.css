@@ -21,7 +21,7 @@
 		}
 		.alquilify-footer{
 		color:white; 
-		border-color: #212529;
+		border: 1px solid #212529 !important;
 		}
 		.alquilify-mb{
 		 margin-bottom: 3rem !important;

@@ -42,7 +42,7 @@ public class WebPanelDaoImpl implements WebPanelDao {
 		return arepo.buscarVencimientoInquilino(inquilino);	
 	}
 	@Override
-	public List<VencimientoServiciosProjection> buscarVencimientoServiciosInqui(Usuario propietario) {
-		return asrepo.buscarVencimientoServiciosInqui(propietario);
+	public List<VencimientoServiciosProjection> buscarVencimientoServiciosInqui(Usuario inquilino) {
+		return asrepo.buscarVencimientoServiciosInqui(inquilino);
 	}
 }

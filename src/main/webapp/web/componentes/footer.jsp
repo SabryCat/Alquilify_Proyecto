@@ -5,24 +5,35 @@
          <div class="col-md-4 mb-5">
              <div class="card h-100 bg-dark alquilify-footer">
                  <div class="card-body">
-                     <h2 class="card-title">Card One</h2>
-                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                     <h4 class="card-title">Datos de contacto</h4>
+                      <br>
+                     <p class="card-text">
+    					Estamos aquí para responder a todas tus preguntas, atender tus inquietudes y proporcionarte el 
+    					mejor servicio posible. Por favor, no dudes en <a class="alquilify-nav-link" style="color:white;" href="/contacto">comunicarte con nosotros.</a>
+                 	</p>
                  </div>
-</div>
+			</div>
          </div>
          <div class="col-md-4 mb-5">
              <div class="card h-100 bg-dark alquilify-footer">
                  <div class="card-body">
-                     <h2 class="card-title">Card Two</h2>
-                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+                     <h4 class="card-title">Enlaces de inter&eacute;s</h4>
+                      <br>
+			            <ul class="ms-auto mb-2 mb-lg-0">
+							<li ><a class="nav-link alquilify-nav-link" href="/servicios">Servicios</a></li>
+						    <li ><a class="nav-link alquilify-nav-link" href="/nosotros">Nosotros</a></li>
+							<li ><a class="nav-link alquilify-nav-link" href="/contacto">Contacto</a></li>
+						    <li ><a class="nav-link alquilify-nav-link" href="/cuenta">Mi cuenta</a></li>
+						</ul>
                  </div>
              </div>
          </div>
          <div class="col-md-4 mb-5">
              <div class="card h-100 bg-dark alquilify-footer">
                  <div class="card-body">
-                     <h2 class="card-title">Card Three</h2>
-                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                     <h4 class="card-title">D&oacute;nde estamos</h4>
+                     <br>
+                    <img class="img-fluid mb-4 mb-lg-0" src="/web/images/contacto.PNG" alt="..." />
                  </div>
              </div>
          </div>

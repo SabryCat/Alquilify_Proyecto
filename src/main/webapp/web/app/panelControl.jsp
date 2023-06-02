@@ -50,8 +50,7 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-							<c:forEach var="ele" items="${contratos}">
-							    					    
+							<c:forEach var="ele" items="${contratos}">							    					    
 						         <c:choose>
 					                <c:when test="${ele.dias_restantes < 0}">
 					                    <tr class="alert alert-danger">
@@ -62,8 +61,7 @@
 					                <c:when test="${ele.dias_restantes <= 30}">
 					                    <tr class="alert alert-info">
 					                </c:when>
-					            </c:choose>						    	
-												    							    							    
+					            </c:choose>						    												    							    							    
 							        <th scope="row">${ele.alquilere.idAlquiler}</th>
 							        <td>${ele.alquilere.tipoContrato.tipo}</td>
 							        <td><fmt:formatDate value="${ele.alquilere.fechaComienzo}" pattern="dd-MM-yyyy" /></td>
